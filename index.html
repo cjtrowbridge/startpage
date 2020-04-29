@@ -306,16 +306,16 @@
     });
     
     $.get("api/?checkMainPower", function(data){
-      percent = data['percent'];
-      state   = data['state'];
+      percent = data['Percent'];
+      state   = data['State'];
       console.log("Main Power: "+state+" "+percent+"%");
       console.log(data);
       $('#mainPowerProgress').html('<div class="progress-bar" role="progressbar" style="width: '+percent+'%;" aria-valuenow="'+percent+'" aria-valuemin="0" aria-valuemax="100">'+percent+'%</div>');
     });
     
     $.get("api/?checkBackupPower", function(data){
-      percent = data['percent'];
-      state   = data['state'];
+      percent = data['Percent'];
+      state   = data['State'];
       console.log("Backup Power: "+state+" "+percent+"%");
       console.log(data);
       $('#backupPowerProgress').html('<div class="progress-bar" role="progressbar" style="width: '+percent+'%;" aria-valuenow="'+percent+'" aria-valuemin="0" aria-valuemax="100">'+percent+'%</div>');
