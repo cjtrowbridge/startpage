@@ -23,7 +23,7 @@ if(isset($_GET['checkShorePower'])){
   die(json_encode($Result));
 }
 
-function pingDevices(){
+function pingDevices($Device){
   switch($Device){
     case 'Internet':
       return array('Internet' => ping('8.8.8.8'));
