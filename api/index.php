@@ -6,7 +6,7 @@ if(isset($_GET['checkInternet'])){
 }
 
 function pingIP($ip) {
-  $pingresult = exec("/bin/ping -n 3 $ip", $outcome, $status);
+  $pingresult = exec("/bin/ping -n -w 3 $ip", $outcome, $status);
   if (0 == $status) {
     return true;
   } else {
