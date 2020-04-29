@@ -52,6 +52,7 @@
             <h5 class="card-title">Local Network</h5>
             <div class="card-text">
               <ul>
+                <li id="internetStatus">Checking Internet Connection...</li>
                 <li><a href="192.168.86.1">Router</a></li>
                 <li><a href="192.168.86.2">NAS</a></li>
                 <li><a href="192.168.86.3">Castle</a></li>
@@ -287,12 +288,14 @@
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script>
-    $.get("api/checkInternet.php", function(data){
+    $.get("api/?checkInternet", function(data){
       if(data=="false"){
         console.log('No Internet Connection');
+        $('#internetStatus').text('No Internet');
         $('#internetLinks').slideU('fast');
       }else{
         console.log('Internet Connection Confirmed');
+        $('#internetStatus').text('Internet Connected');
       }
     });
   </script>
