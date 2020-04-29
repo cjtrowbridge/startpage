@@ -91,18 +91,18 @@
             <h5 class="card-title">Power Systems Status</h5>
             <div class="card-text">
               <h6><a href="javascript:void(0);">Main Power</a></h6>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+              <div class="progress" id="mainPowerProgress>
+                
               </div>
               
               <h6 class="mt-3"><a href="javascript:void(0);">BackupPower</a></h6>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+              <div class="progress" id="backupPowerProgress">
+                
               </div>
               
-              <h6 class="mt-3"><a href="javascript:void(0);">Engine Power</a>: Online</h6>
+              <h6 class="mt-3"><a href="javascript:void(0);">Engine Power</a>: <span id="enginePowerStatus">Checking...</span></h6>
               
-              <h6 class="mt-3"><a href="javascript:void(0);">Shore Power</a>: Offline</h6>
+              <h6 class="mt-3"><a href="javascript:void(0);">Shore Power</a>: <span id="shorePowerStatus">Checking...</span></h6>
               
             </div><!--End Card-text-->
           </div><!--End Card-body-->
@@ -304,6 +304,35 @@
         $('#internetStatus').html('<span style="color: green;">Internet Connected</span>');
       }
     });
+    
+    $.get("api/?checkMainPower", function(data){
+      percent = data['percent'];
+      state   = data['state'];
+      console.log("Main Power: "+state+" "+percent+"%");
+    });
+    
+    $.get("api/?checkBackupPower", function(data){
+      percent = data['percent'];
+      state   = data['state'];
+      console.log("Backup Power: "+state+" "+percent+"%");
+    });
+    
+    $.get("api/?checkEnginePower", function(data){
+      if(data=="false"){
+        $('#enginePowerStatus').html('<span style="color: red;">Offline</span>');
+      }else{
+        $('#enginePowerStatus').html('<span style="color: green;">Online</span>');
+      }
+    });
+    
+    $.get("api/?checkShorePower", function(data){
+      if(data=="false"){
+        $('#shorePowerStatus').html('<span style="color: red;">Offline</span>');
+      }else{
+        $('#shorePowerStatus').html('<span style="color: green;">Online</span>');
+      }
+    });
   </script>
+  <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
 </body>
 </html>
