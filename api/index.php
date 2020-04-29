@@ -33,7 +33,7 @@ function pingDevices(){
  );
 }
 function pingIP($ip){
-  $pingresult = exec("/bin/ping -n -W 1 $ip", $outcome, $status);
+  $pingresult = exec("/bin/ping -n -c1 -W1 $ip", $outcome, $status);
   if(0 == $status){
     return true;
   }else{
