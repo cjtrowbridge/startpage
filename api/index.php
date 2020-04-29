@@ -25,21 +25,16 @@ if(isset($_GET['checkShorePower'])){
 
 function pingDevices(){
   switch($Device){
-      case 'Internet';
-        return array('Internet' => ping('8.8.8.8'));
-        break;
-      case 'Router';
-        return array('Router' => ping('192.168.86.1'));
-        break;
-      case 'NAS';
-        return array('NAS' => ping('192.168.86.2'));
-        break;
-      case 'Server';
-        return array('Server' => ping('192.168.86.3'));
-        break;
-      case 'Surveillance';
-        return array('Surveillance' => ping('192.168.86.4'));
-        break;
+    case 'Internet';
+      return array('Internet' => ping('8.8.8.8'));
+    case 'Router';
+      return array('Router' => ping('192.168.86.1'));
+    case 'NAS';
+      return array('NAS' => ping('192.168.86.2'));
+    case 'Server';
+      return array('Server' => ping('192.168.86.3'));
+    case 'Surveillance';
+      return array('Surveillance' => ping('192.168.86.4'));
   }
 }
 function ping($ip){
