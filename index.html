@@ -103,7 +103,7 @@
         
         
       </div>
-      <div class="card-columns">
+      <div class="card-columns" id="internetLinks">
         
         <div class="card mb-4">
           <div class="card-body">
@@ -286,5 +286,15 @@
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
+  <script>
+    $.get("api/checkInternet.php", function(data){
+      if(data=="false"){
+        console.log('No Internet Connection');
+        $('#internetLinks').slideU('fast');
+      }else{
+        console.log('Internet Connection Confirmed');
+      }
+    });
+  </script>
 </body>
 </html>
