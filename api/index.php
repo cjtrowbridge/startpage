@@ -1,10 +1,8 @@
 <?php
 
-switch($_GET['command']){
-  case 'checkInternet':
-    $Result = pingIP('8.8.8.8');
-    die(json_encode($Result));
-    break;
+if(isset($_GET['checkInternet'])){
+  $Result = pingIP('8.8.8.8');
+  die(json_encode($Result));
 }
 
 function pingIP($ip) {
