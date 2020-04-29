@@ -45,8 +45,12 @@ function checkBackupPower(){
   );
 }
 function checkEnginePower(){
-  return true;
+  return array(
+    'State' => true
+  );
 }
 function checkShorePower(){
-  return false;
+  return array(
+    'State' => false
+  );
 }
