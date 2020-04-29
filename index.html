@@ -52,11 +52,11 @@
             <h5 class="card-title">Local Network</h5>
             <div class="card-text">
               <ul>
-                <li id="internetStatus">Checking Internet Connection...</li>
-                <li><a href="192.168.86.1">Router</a></li>
-                <li><a href="192.168.86.2">NAS</a></li>
-                <li><a href="192.168.86.3">Server</a></li>
-                <li><a href="192.168.86.4">Surveillance</a></li>
+                <li><a id="linkInternet"       href="https://google.com">Internet</li>
+                <li><a id="linkRouter"       href="192.168.86.1">Router</a></li>
+                <li><a id="linkNAS"          href="192.168.86.2">NAS</a></li>
+                <li><a id="linkServer"       href="192.168.86.3">Server</a></li>
+                <li><a id="linkSurveillance" href="192.168.86.4">Surveillance</a></li>
               </ul>
               
             </div><!--End Card-text-->
@@ -294,14 +294,33 @@
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script>
-    $.get("api/?checkInternet", function(data){
-      if(data=="false"){
-        console.log('No Internet Connection');
-        $('#internetStatus').html('<span style="color: red;">No Internet</span>');
-        $('#internetLinks').slideUp('fast');
+    $.get("api/?checkConnectivity", function(data){
+      console.log('Connectivity Report');
+      console.log(data);
+      if(data['Internet']=='true'){
+        $('#linkInternet').css('color','green');
       }else{
-        console.log('Internet Connection Confirmed');
-        $('#internetStatus').html('<span style="color: green;">Internet Connected</span>');
+        $('#linkInternet').css('color','red');
+      }
+      if(data['Router']=='true'){
+        $('#linkRouter').css('color','green');
+      }else{
+        $('#linkRouter').css('color','red');
+      }
+      if(data['NAS']=='true'){
+        $('#linkNAS').css('color','green');
+      }else{
+        $('#linkNAS').css('color','red');
+      }
+      if(data['Server']=='true'){
+        $('#linkServer').css('color','green');
+      }else{
+        $('#linkServer').css('color','red');
+      }
+      if(data['Surveillance']=='true'){
+        $('#linkSurveillance').css('color','green');
+      }else{
+        $('#linkSurveillance').css('color','red');
       }
     });
     
