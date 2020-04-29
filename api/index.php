@@ -25,15 +25,15 @@ if(isset($_GET['checkShorePower'])){
 
 function pingDevices(){
   switch($Device){
-    case 'Internet';
+    case 'Internet':
       return array('Internet' => ping('8.8.8.8'));
-    case 'Router';
+    case 'Router':
       return array('Router' => ping('192.168.86.1'));
-    case 'NAS';
+    case 'NAS':
       return array('NAS' => ping('192.168.86.2'));
-    case 'Server';
+    case 'Server':
       return array('Server' => ping('192.168.86.3'));
-    case 'Surveillance';
+    case 'Surveillance':
       return array('Surveillance' => ping('192.168.86.4'));
   }
 }
