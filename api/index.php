@@ -2,8 +2,8 @@
 
 header("Content-type:application/json");
 
-if(isset($_GET['checkInternet'])){
-  $Result = pingIP('8.8.8.8');
+if(isset($_GET['checkDevices'])){
+  $Result = pingDevices();
   die(json_encode($Result));
 }
 if(isset($_GET['checkMainPower'])){
@@ -23,7 +23,15 @@ if(isset($_GET['checkShorePower'])){
   die(json_encode($Result));
 }
 
-
+function pingDevices(){
+ return array(
+   'Internet'     => ping('8.8.8.8'),
+   'Router'       => ping('192.168.86.1'),
+   'NAS'          => ping('192.168.86.2'),
+   'Server'       => ping('192.168.86.3'),
+   'Surveillance' => ping('192.168.86.4')
+ );
+}
 function pingIP($ip){
   $pingresult = exec("/bin/ping -n -w 3 $ip", $outcome, $status);
   if(0 == $status){
