@@ -34,6 +34,9 @@
     body, h1, h2, h3, h4, h5, h6, a{
       color: #D3AFA6;
     }
+    #localLinks{
+      display: none;
+    }
   </style>
 
   <title>Startpage - CJ Trowbridge</title>
@@ -45,7 +48,7 @@
     </div>
     <div class="col-12">
       
-      <div class="card-columns">
+      <div class="card-columns" id="localLinks">
         
         <div class="card mb-4">
           <div class="card-body">
@@ -335,7 +338,9 @@
     $.get("api/?checkConnectivity=Server", function(data){
       if(data['Server']==true){
         $('#linkServer').css('color','green');
+        $('#localLinks').show();
       }else{
+        $('#localLinks').hide();
         console.log("Can't reach the server");
         $('#linkServer').css('color','red');
       }
