@@ -300,26 +300,31 @@
       if(data['Internet']=='true'){
         $('#linkInternet').css('color','green');
       }else{
+        console.log("Can't reach the internet");
         $('#linkInternet').css('color','red');
       }
       if(data['Router']=='true'){
         $('#linkRouter').css('color','green');
       }else{
+        console.log("Can't reach the router");
         $('#linkRouter').css('color','red');
       }
       if(data['NAS']=='true'){
         $('#linkNAS').css('color','green');
       }else{
+        console.log("Can't reach the NAS");
         $('#linkNAS').css('color','red');
       }
       if(data['Server']=='true'){
         $('#linkServer').css('color','green');
       }else{
+        console.log("Can't reach the server");
         $('#linkServer').css('color','red');
       }
       if(data['Surveillance']=='true'){
         $('#linkSurveillance').css('color','green');
       }else{
+        console.log("Can't reach the surveillance");
         $('#linkSurveillance').css('color','red');
       }
     });
