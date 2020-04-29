@@ -297,11 +297,11 @@
     $.get("api/?checkInternet", function(data){
       if(data=="false"){
         console.log('No Internet Connection');
-        $('#internetStatus').text('<span style="color: red;">No Internet</span>');
+        $('#internetStatus').html('<span style="color: red;">No Internet</span>');
         $('#internetLinks').slideUp('fast');
       }else{
         console.log('Internet Connection Confirmed');
-        $('#internetStatus').text('<span style="color: green;">Internet Connected</span>');
+        $('#internetStatus').html('<span style="color: green;">Internet Connected</span>');
       }
     });
   </script>
