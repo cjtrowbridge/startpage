@@ -52,7 +52,7 @@
             <h5 class="card-title">Local Network</h5>
             <div class="card-text">
               <ul>
-                <li><a id="linkInternet"       href="https://google.com">Internet</li>
+                <li><a id="linkInternet"     href="https://google.com">Internet</li>
                 <li><a id="linkRouter"       href="192.168.86.1">Router</a></li>
                 <li><a id="linkNAS"          href="192.168.86.2">NAS</a></li>
                 <li><a id="linkServer"       href="192.168.86.3">Server</a></li>
@@ -300,7 +300,7 @@
       if(data['Internet']=='true'){
         $('#linkInternet').css('color','green');
       }else{
-        console.log("Can't reach the internet");
+        console.log("Can't reach the internet: "+data['Internet']);
         $('#linkInternet').css('color','red');
       }
       if(data['Router']=='true'){
