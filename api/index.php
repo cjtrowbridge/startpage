@@ -2,7 +2,7 @@
 
 header("Content-type:application/json");
 
-if(isset($_GET['checkDevices'])){
+if(isset($_GET['checkConnectivity'])){
   $Result = pingDevices();
   die(json_encode($Result));
 }
