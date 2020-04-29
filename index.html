@@ -309,6 +309,7 @@
       percent = data['percent'];
       state   = data['state'];
       console.log("Main Power: "+state+" "+percent+"%");
+      console.log(data);
       $('#mainPowerProgress').html('<div class="progress-bar" role="progressbar" style="width: '+percent+'%;" aria-valuenow="'+percent+'" aria-valuemin="0" aria-valuemax="100">'+percent+'%</div>');
     });
     
@@ -316,6 +317,7 @@
       percent = data['percent'];
       state   = data['state'];
       console.log("Backup Power: "+state+" "+percent+"%");
+      console.log(data);
       $('#backupPowerProgress').html('<div class="progress-bar" role="progressbar" style="width: '+percent+'%;" aria-valuenow="'+percent+'" aria-valuemin="0" aria-valuemax="100">'+percent+'%</div>');
     });
     
