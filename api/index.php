@@ -10,8 +10,8 @@ switch($_GET['command']){
 function pingIP($ip) {
   $pingresult = exec("/bin/ping -n 3 $ip", $outcome, $status);
   if (0 == $status) {
-    return true
+    return true;
   } else {
-    return false
+    return false;
   }
 }
