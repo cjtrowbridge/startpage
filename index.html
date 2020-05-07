@@ -53,7 +53,7 @@
         <div class="card mb-4">
           <div class="card-body">
             <h5 class="card-title">Local Network</h5>
-            <div class="card-text">
+            <div class="card-text" id="cardConnectivity">
               <ul>
                 <li><a id="linkInternet"     href="https://google.com">Internet</li>
                 <li><a id="linkRouter"       href="http://192.168.86.1">Router</a></li>
@@ -61,7 +61,7 @@
                 <li><a id="linkServer"       href="http://192.168.86.3">Server</a></li>
                 <li><a id="linkSurveillance" href="http://192.168.86.4">Surveillance</a></li>
               </ul>
-              <img src="http://192.168.86.4/IMAGE.JPG" class="img-fluid" id="surveillanceFeed">
+              
               
             </div><!--End Card-text-->
           </div><!--End Card-body-->
@@ -391,6 +391,7 @@
     });
     
     function startSurveillance(){
+      $('#cardConnectivity').append('<img src="http://192.168.86.4/IMAGE.JPG" class="img-fluid" id="surveillanceFeed">');
       setInterval(function(){
         var time = Math.round(new Date().getTime()/1000);
         $('#surveillanceFeed').attr('src','http://192.168.86.4/IMAGE.JPG?'+time);
