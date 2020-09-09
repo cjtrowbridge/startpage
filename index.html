@@ -367,6 +367,47 @@
         $('#linkSurveillance').css('color','red');
       }
     });
+    $.get("api/?checkConnectivity=Bridge", function(data){
+      if(data['Bridge']==true){
+        $('#linkBridge').css('color','green');
+      }else{
+        console.log("Can't reach the Bridge");
+        $('#linkBridge').css('color','red');
+      }
+    });
+    $.get("api/?checkConnectivity=Server", function(data){
+      if(data['Server']==true){
+        $('#linkServer').css('color','green');
+      }else{
+        console.log("Can't reach the Bridge");
+        $('#linkServer').css('color','red');
+      }
+    });
+    $.get("api/?checkConnectivity=Kali", function(data){
+      if(data['Kali']==true){
+        $('#linkKali').css('color','green');
+      }else{
+        console.log("Can't reach the Bridge");
+        $('#linkKali').css('color','red');
+      }
+    });
+    $.get("api/?checkConnectivity=Workstation", function(data){
+      if(data['Workstation']==true){
+        $('#linkWorkstation').css('color','green');
+      }else{
+        console.log("Can't reach the Bridge");
+        $('#linkWorkstation').css('color','red');
+      }
+    });
+    $.get("api/?checkConnectivity=Laptop", function(data){
+      if(data['Laptop']==true){
+        $('#linkLaptop').css('color','green');
+      }else{
+        console.log("Can't reach the Bridge");
+        $('#linkLaptop').css('color','red');
+      }
+    });
+    
     
     $.get("api/?checkMainPower", function(data){
       percent = data['Percent'];
