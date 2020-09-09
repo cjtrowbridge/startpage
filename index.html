@@ -340,15 +340,16 @@
         console.log("Sensor Data:");
         console.log(data);
         
-        $('#sensorData').html('<table><thead><tr><th>Inside</th><th>Outside</th></tr></thead><tbody>');
+        var table = '<table><thead><tr><th>Inside</th><th>Outside</th></tr></thead><tbody>';
         
         for(var key in data['Inside']){
           if(data['Inside'].hasOwnProperty(key)){
-            $('#sensorData').append('<tr><td>'+key+'</td><td>'+data['Inside'][key]+'</td><td>'+data['Outside'][key]+'</td></tr>');            
+            table = table + '<tr><td>'+key+'</td><td>'+data['Inside'][key]+'</td><td>'+data['Outside'][key]+'</td></tr>';
           }
         }
         
-        $('#sensorData').append('</tbody></table>');
+        table = table + '</tbody></table>';
+        $('#sensorData').html(table);
       });
     }
     
