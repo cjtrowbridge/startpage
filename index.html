@@ -345,7 +345,7 @@
         for(var key in data['Inside']){
           if(data['Inside'].hasOwnProperty(key)){
             var sensor = key.replace("Method ", "");
-            table = table + "\n    <tr>\n      <td>'+sensor+'</td>\n      <td>'+data['Inside'][key]+'</td>\n      <td>'+data['Outside'][key]+'</td>\n    </tr>";
+            table = table + "\n    <tr>\n      <td>"+sensor+"</td>\n      <td>"+data['Inside'][key]+"</td>\n      <td>"+data['Outside'][key]+"</td>\n    </tr>";
           }
         }
         
