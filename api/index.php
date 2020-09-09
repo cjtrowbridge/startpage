@@ -31,10 +31,20 @@ function pingDevices($Device){
       return array('Router' => ping('192.168.86.1'));
     case 'NAS':
       return array('NAS' => ping('192.168.86.2'));
-    case 'Server':
-      return array('Server' => ping('192.168.86.3'));
+    
     case 'Surveillance':
       return array('Surveillance' => ping('192.168.86.4'));
+    case 'Bridge':
+      return array('Server' => ping('192.168.86.5'));
+    case 'Server':
+      return array('Server' => ping('192.168.86.6'));
+    case 'Kali':
+      return array('Server' => ping('192.168.86.7'));
+    case 'Workstation':
+      return array('Server' => ping('192.168.86.8'));
+    case 'Laptop':
+      return array('Server' => ping('192.168.86.9'));
+    
   }
 }
 function ping($ip){
