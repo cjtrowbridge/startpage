@@ -297,7 +297,7 @@
         console.log("Sensor Data:");
         console.log(data);
         
-        var table = "\n<table width=\"100%\">\n  <thead>\n    <tr>\n      <th></th>\n      <th>Inside</th>\n      <th>Outside</th>\n    </tr>\n  </thead>\n  <tbody>";
+        var table = "\n<table width=\"100%\">\n  <thead>\n    <tr>\n      <th><a href=\"grapher.php\"></a>Graphs</th>\n      <th>Inside</th>\n      <th>Outside</th>\n    </tr>\n  </thead>\n  <tbody>";
         
         for(var key in data['Inside']){
           if(data['Inside'].hasOwnProperty(key)){
