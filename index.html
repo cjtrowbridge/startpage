@@ -94,10 +94,10 @@
               
               <h6><a href="javascript:void(0);">Scenes</a></h6>
               <ul>
-                <li><a href="">Good Morning</a></li>
-                <li><a href="">Chill</a></li>
-                <li><a href="">Leaving</a></li>
-                <li><a href="">Good Night</a></li>
+                <li><a href="javascript:void(0);" onclick="ChangeScene('morning');">Good Morning</a></li>
+                <li><a href="javascript:void(0);" onclick="ChangeScene('chill');">Chill</a></li>
+                <li><a href="javascript:void(0);" onclick="ChangeScene('bed_time');">Bed Time</a></li>
+                <li><a href="javascript:void(0);" onclick="ChangeScene('blackout');">Blackout</a></li>
               </ul>
             </div><!--End Card-text-->
           </div><!--End Card-body-->
@@ -313,6 +313,14 @@
         
         table = table + "\n    </tbody>\n  </table>";
         $('#sensorData').html(table);
+        setTimeout(function(){updateSensors();},60000);
+      });
+    }
+    
+    function ChangeScene(scene){
+      console.log('Changing Scene: '+scene); 
+      $.get("api/?scene="+scene, function(data){
+        console.log('Scene Changed: '+data);
       });
     }
     
