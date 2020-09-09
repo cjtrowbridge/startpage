@@ -342,9 +342,8 @@
         
         $('#sensorData').html('<table><thead><tr><th>Inside</th><th>Outside</th></tr></thead><tbody>');
         
-        var Inside = data['Inside'];
-        for(var key in Inside){
-          if(data.hasOwnProperty(key)){
+        for(var key in data['Inside']){
+          if(data['Inside'].hasOwnProperty(key)){
             $('#sensorData').append('<tr><td>'+key+'</td><td>'+data['Inside'][key]+'</td><td>'+data['Outside'][key]+'</td></tr>');            
           }
         }
