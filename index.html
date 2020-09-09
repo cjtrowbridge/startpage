@@ -340,16 +340,16 @@
         console.log("Sensor Data:");
         console.log(data);
         
-        var table = "\n<table>\n  <thead>\n    <tr>\n      <th></th>\n      <th>Inside</th>\n      <th>Outside</th>\n    </tr>\n  </thead>\n  <tbody>';
+        var table = "\n<table>\n  <thead>\n    <tr>\n      <th></th>\n      <th>Inside</th>\n      <th>Outside</th>\n    </tr>\n  </thead>\n  <tbody>";
         
         for(var key in data['Inside']){
           if(data['Inside'].hasOwnProperty(key)){
             var sensor = str.replace("Method ", "");
-            table = table + '\n    <tr>\n      <td>'+sensor+'</td>\n      <td>'+data['Inside'][key]+'</td>\n      <td>'+data['Outside'][key]+'</td>\n    </tr>';
+            table = table + "\n    <tr>\n      <td>'+sensor+'</td>\n      <td>'+data['Inside'][key]+'</td>\n      <td>'+data['Outside'][key]+'</td>\n    </tr>";
           }
         }
         
-        table = table + '\n    </tbody>\n  </table>';
+        table = table + "\n    </tbody>\n  </table>";
         $('#sensorData').html(table);
       });
     }
