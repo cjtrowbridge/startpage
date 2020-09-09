@@ -324,7 +324,9 @@
   <script src="js/bootstrap.min.js"></script>
   <script>
     function update(){
+      console.log('Updating...');
       $.get("api/?update", function(data){
+        console.log('Updated');
         window.location.reload();
       });
     }
