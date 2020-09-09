@@ -337,24 +337,16 @@
     function updateSensors(){
       $('#sensorData').html('Refreshing Data...');
       $.get("/sensors.php", function(data){
-        $('#sensorData').html('');
-        var node = '';
-        for(var key in data){
+        
+        $('#sensorData').html('<table><thead><tr><th>Inside</th><th>Outside</th></tr></thead><tbody>');
+        
+        for(var key in data['Inside']){
           if(data.hasOwnProperty(key)){
-            if(
-              key != 'Time'
-            ){
-              var words = key.split(" ");
-              var firstWord = words[0];
-              if(firstWord != node){
-                node = firstWord;
-                $('#sensorData').append('<h4>'+node+'</h4>');
-              }
-              var sensorName = key.substr(key.indexOf(" ") + 1);
-              $('#sensorData').append('<b>'+sensorName+'</b> '+data[key]+'<br>');
-            }
+            $('#sensorData').append('<tr><td>'+key+'</td><td>'+data['Inside'][key]+'</td><td>'+data['Outside'][key]+'</td></tr>');            
           }
         }
+        
+        $('#sensorData').append('</tbody></table>');
       });
     }
     
