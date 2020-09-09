@@ -338,9 +338,21 @@
       $('#sensorData').html('Refreshing Data...');
       $.get("/sensors.php", function(data){
         $('#sensorData').html('');
+        var node = '';
         for(var key in data){
           if(data.hasOwnProperty(key)){
-            $('#sensorData').append('<p><b>'+key+'</b> '+data[key]+'</p>');
+            if(
+              key != 'Time'
+            ){
+              var words = key.split(" ");
+              var firstWord = words[0]);
+              if(firstWord != node){
+                node = firstWord;
+                $('#sensorData').append('<h4>'+node+'</h4>');
+              }
+              var sensorName = key.substr(key.indexOf(" ") + 1);
+              $('#sensorData').append('<b>'+sensorName+'</b> '+data[key]+'<br>');
+            }
           }
         }
       });
