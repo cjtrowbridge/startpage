@@ -339,12 +339,11 @@
       $.get("/sensors.php", function(data){
         console.log("Sensor Data:");
         console.log(data);
-        console.log(data['Inside']);
-        console.log(data.Inside);
         
         $('#sensorData').html('<table><thead><tr><th>Inside</th><th>Outside</th></tr></thead><tbody>');
         
-        for(var key in data['Inside']){
+        var Inside = data['Inside'];
+        for(var key in Inside){
           if(data.hasOwnProperty(key)){
             $('#sensorData').append('<tr><td>'+key+'</td><td>'+data['Inside'][key]+'</td><td>'+data['Outside'][key]+'</td></tr>');            
           }
