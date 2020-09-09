@@ -338,9 +338,9 @@
       $('sensorData').html('Refreshing Data...');
       $.get("/sensors.php", function(data){
         $('sensorData').html('');
-        for(var key in p){
-          if(p.hasOwnProperty(key)){
-            $('sensorData').append('<p><b>'+key+'</b> '+p[key]+'</p>');
+        for(var key in data){
+          if(data.hasOwnProperty(key)){
+            $('sensorData').append('<p><b>'+key+'</b> '+data[key]+'</p>');
           }
         }
       });
