@@ -22,6 +22,9 @@ if(isset($_GET['checkShorePower'])){
   $Result = checkShorePower();
   die(json_encode($Result));
 }
+if(isset($_GET['update'])){
+  die(shell_exec('cd /var/www/ && git reset --hard && git pull'));
+}
 
 function pingDevices($Device){
   switch($Device){
