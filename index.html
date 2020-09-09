@@ -332,9 +332,11 @@
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script>
+    
+    updateSensors();
     function updateSensors(){
       $('sensorData').html('Refreshing Data...');
-      $.get("sensors.php", function(data){
+      $.get("/sensors.php", function(data){
         $('sensorData').html('');
         for(var key in p){
           if(p.hasOwnProperty(key)){
