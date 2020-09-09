@@ -2,6 +2,14 @@
 
 header("Content-type:application/json");
 
+if(isset($_GET['scene'])){
+  include_once('webhooks.php');
+  if(isset($Webhooks[$_GET['scene']])){
+    file_get_contents($Webhooks[$_GET['scene']]);
+  }
+  exit;
+}
+
 if(isset($_GET['checkConnectivity'])){
   $Result = pingDevices($_GET['checkConnectivity']);
   die(json_encode($Result));
