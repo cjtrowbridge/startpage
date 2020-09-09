@@ -335,12 +335,12 @@
     
     updateSensors();
     function updateSensors(){
-      $('sensorData').html('Refreshing Data...');
+      $('#sensorData').html('Refreshing Data...');
       $.get("/sensors.php", function(data){
-        $('sensorData').html('');
+        $('#sensorData').html('');
         for(var key in data){
           if(data.hasOwnProperty(key)){
-            $('sensorData').append('<p><b>'+key+'</b> '+data[key]+'</p>');
+            $('#sensorData').append('<p><b>'+key+'</b> '+data[key]+'</p>');
           }
         }
       });
