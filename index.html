@@ -37,6 +37,9 @@
     #localLinks{
       display: none;
     }
+    .timer{
+      display: none;
+    }
   </style>
 
   <title>Startpage - CJ Trowbridge</title>
@@ -52,7 +55,7 @@
         
         <div class="card mb-4">
           <div class="card-body">
-            <h5 class="card-title">Local Network <a href="javascript:void(0);" onclick="updateRepository();">🔁</a></h5>
+            <h5 class="card-title">Local Network <a href="javascript:void(0);" onclick="updateRepository();">🔁</a><span id="updateRepositoryTimer" class="timer">⌛</span></h5>
             <div class="card-text" id="cardConnectivity">
               <ul>
                 <li><a id="linkInternet"     href="https://google.com">Internet</li>
@@ -73,7 +76,7 @@
         
         <div class="card mb-4">
           <div class="card-body">
-            <h5 class="card-title">Telemetry <a href="javascript:void(0);" onclick="updateSensors();">🔁</a></h5>
+            <h5 class="card-title">Telemetry <a href="javascript:void(0);" onclick="updateSensors();">🔁</a><span id="updateTelemetryTimer" class="timer">⌛</span></h5>
             <div class="card-text">
               <div id="sensorData"></div>
             </div><!--End Card-text-->
@@ -288,7 +291,9 @@
     
     updateSensors();
     function updateSensors(){
+      $('#updateTelemetryTimer').show();
       $.get("/sensors.php", function(data){
+        $('#updateTelemetryTimer').hide();
         console.log("Sensor Data:");
         console.log(data);
         
@@ -315,9 +320,11 @@
     }
     
     function updateRepository(){
+      $('#updateRepositoryTimer').show();
       console.log('Updating...');
       $.get("api/?update", function(data){
         console.log('Updated');
+        $('#updateRepositoryTimer').hide();
         location.reload();
       });
     }
