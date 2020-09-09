@@ -52,7 +52,7 @@
         
         <div class="card mb-4">
           <div class="card-body">
-            <h5 class="card-title">Local Network <a href="javascript:void(0);" onclick="update();">🔁</a></h5>
+            <h5 class="card-title">Local Network <a href="javascript:void(0);" onclick="updateRepository();">🔁</a></h5>
             <div class="card-text" id="cardConnectivity">
               <ul>
                 <li><a id="linkInternet"     href="https://google.com">Internet</li>
@@ -67,6 +67,15 @@
               </ul>
               
               
+            </div><!--End Card-text-->
+          </div><!--End Card-body-->
+        </div><!--End Card-->
+        
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Sensors <a href="javascript:void(0);" onclick="updateSensors();">🔁</a></h5>
+            <div class="card-text">
+              <div id="sensorData"></div>
             </div><!--End Card-text-->
           </div><!--End Card-body-->
         </div><!--End Card-->
@@ -323,7 +332,19 @@
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script>
-    function update(){
+    function updateSensors(){
+      $('sensorData').html('Refreshing Data...');
+      $.get("sensors.php", function(data){
+        $('sensorData').html('');
+        for(var key in p){
+          if(p.hasOwnProperty(key)){
+            $('sensorData').append('<p><b>'+key+'</b> '+p[key]+'</p>');
+          }
+        }
+      });
+    }
+    
+    function updateRepository(){
       console.log('Updating...');
       $.get("api/?update", function(data){
         console.log('Updated');
