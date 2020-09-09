@@ -288,7 +288,6 @@
     
     updateSensors();
     function updateSensors(){
-      $('#sensorData').html('Refreshing Data...');
       $.get("/sensors.php", function(data){
         console.log("Sensor Data:");
         console.log(data);
