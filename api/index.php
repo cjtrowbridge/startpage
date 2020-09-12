@@ -46,15 +46,15 @@ function pingDevices($Device){
     case 'Surveillance':
       return array('Surveillance' => ping('192.168.86.4'));
     case 'Bridge':
-      return array('Server' => ping('192.168.86.5'));
+      return array('Bridge' => ping('192.168.86.5'));
     case 'Server':
       return array('Server' => ping('192.168.86.6'));
+    case 'Mycroft':
+      return array('Mycroft' => ping('192.168.86.7'));
     case 'Kali':
-      return array('Server' => ping('192.168.86.7'));
-    case 'Workstation':
-      return array('Server' => ping('192.168.86.8'));
+      return array('Kali' => ping('192.168.86.8'));
     case 'Laptop':
-      return array('Server' => ping('192.168.86.9'));
+      return array('Laptop' => ping('192.168.86.9'));
     
   }
 }
