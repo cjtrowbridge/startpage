@@ -65,9 +65,10 @@
                 <li><a id="linkSurveillance" href="http://192.168.86.4">Surveillance</a></li>
                 <li><a id="linkBridge"       href="http://192.168.86.5" title="🌲🕒⚾">Bridge</a></li>
                 <li><a id="linkServer"       href="http://192.168.86.6" title="🔥📔✨">Application Server</a></li>
-                <li><a id="linkKali"         href="http://192.168.86.7" title="😢🐺🏠">Kali</a></li>
-                <li><a id="linkWorkstation"  href="http://192.168.86.8" title="🔨💪👻">Workstation</a></li>                
+                <li><a id="linkMycroft"      href="http://192.168.86.7" title="🔨💪👻">Mycroft</a></li>                
+                <li><a id="linkKali"         href="http://192.168.86.8" title="😢🐺🏠">Kali</a></li>
               </ul>
+              
               
               
             </div><!--End Card-text-->
@@ -396,12 +397,12 @@
         $('#linkKali').css('color','red');
       }
     });
-    $.get("api/?checkConnectivity=Workstation", function(data){
-      if(data['Workstation']==true){
-        $('#linkWorkstation').css('color','green');
+    $.get("api/?checkConnectivity=Mycroft", function(data){
+      if(data['Mycroft']==true){
+        $('#linkMycroft').css('color','green');
       }else{
         console.log("Can't reach the Bridge");
-        $('#linkWorkstation').css('color','red');
+        $('#linkMycroft').css('color','red');
       }
     });
     $.get("api/?checkConnectivity=Laptop", function(data){
