@@ -67,6 +67,7 @@
                 <li><a id="linkServer"       href="http://192.168.86.6" title="🔥📔✨">Application Server</a></li>
                 <li><a id="linkMycroft"      href="http://192.168.86.7" title="🔨💪👻">Mycroft</a></li>                
                 <li><a id="linkKali"         href="http://192.168.86.8" title="😢🐺🏠">Kali</a></li>
+                <li><a id="linkLaptop"       href="http://192.168.86.9">Laptop</a></li>
               </ul>
               
               
@@ -329,91 +330,126 @@
         location.reload();
       });
     }
-    $.get("api/?checkConnectivity=Internet", function(data){
-      if(data['Internet']==true){
-        $('#linkInternet').css('color','green');
-      }else{
-        $('#linkInternet').css('color','red');
-      }
-    });
-    $.get("api/?checkConnectivity=Router", function(data){
-      if(data['Router']==true){
-        $('#linkRouter').css('color','green');
-      }else{
-        console.log("Can't reach the router");
-        $('#linkRouter').css('color','red');
-      }
-    });
-    $.get("api/?checkConnectivity=NAS", function(data){
-      if(data['NAS']==true){
-        $('#linkNAS').css('color','green');
-      }else{
-        console.log("Can't reach the NAS");
-        $('#linkNAS').css('color','red');
-      }
-    });
-    $.get("api/?checkConnectivity=Server", function(data){
-      if(data['Server']==true){
-        $('#linkServer').css('color','green');
-        $('#localLinks').show();
-        
-        //startSurveillance();
-        
-      }else{
-        $('#localLinks').hide();
-        console.log("Can't reach the server");
-        $('#linkServer').css('color','red');
-      }
-    });
-    $.get("api/?checkConnectivity=Surveillance", function(data){
-      if(data['Surveillance']==true){
-        $('#linkSurveillance').css('color','green');
-      }else{
-        console.log("Can't reach the surveillance");
-        $('#linkSurveillance').css('color','red');
-      }
-    });
-    $.get("api/?checkConnectivity=Bridge", function(data){
-      if(data['Bridge']==true){
-        $('#linkBridge').css('color','green');
-      }else{
-        console.log("Can't reach the Bridge");
-        $('#linkBridge').css('color','red');
-      }
-    });
-    $.get("api/?checkConnectivity=Server", function(data){
-      if(data['Server']==true){
-        $('#linkServer').css('color','green');
-      }else{
-        console.log("Can't reach the Bridge");
-        $('#linkServer').css('color','red');
-      }
-    });
-    $.get("api/?checkConnectivity=Kali", function(data){
-      if(data['Kali']==true){
-        $('#linkKali').css('color','green');
-      }else{
-        console.log("Can't reach the Bridge");
-        $('#linkKali').css('color','red');
-      }
-    });
-    $.get("api/?checkConnectivity=Mycroft", function(data){
-      if(data['Mycroft']==true){
-        $('#linkMycroft').css('color','green');
-      }else{
-        console.log("Can't reach the Bridge");
-        $('#linkMycroft').css('color','red');
-      }
-    });
-    $.get("api/?checkConnectivity=Laptop", function(data){
-      if(data['Laptop']==true){
-        $('#linkLaptop').css('color','green');
-      }else{
-        console.log("Can't reach the Bridge");
-        $('#linkLaptop').css('color','red');
-      }
-    });
     
+    checkNetworkStatus();    
+    function checkNetworkStatus(){
+      checkInternet();
+      checkRouter();
+      checkNAS();
+      //missing something at address 3
+      checkSurveillance();
+      checkBridge();
+      checkServer();
+      checkMycroft();
+      checkKali();
+      checkLaptop();
+      checkLaptop();
+      
+      setTimeout(function(){checkNetworkStatus();},60000);
+    }
+    
+    function checkInternet(){
+      $.get("api/?checkConnectivity=Internet", function(data){
+        if(data['Internet']==true){
+          $('#linkInternet').css('color','green');
+        }else{
+          $('#linkInternet').css('color','red');
+        }
+      });
+    }
+    function checkRouter(){
+      $.get("api/?checkConnectivity=Router", function(data){
+        if(data['Router']==true){
+          $('#linkRouter').css('color','green');
+        }else{
+          console.log("Can't reach the router");
+          $('#linkRouter').css('color','red');
+        }
+      });
+    }
+    function checkNAS(){
+      $.get("api/?checkConnectivity=NAS", function(data){
+        if(data['NAS']==true){
+          $('#linkNAS').css('color','green');
+        }else{
+          console.log("Can't reach the NAS");
+          $('#linkNAS').css('color','red');
+        }
+      });
+    }
+    //something at address 3
+    function checkSurveillance(){
+      $.get("api/?checkConnectivity=Surveillance", function(data){
+        if(data['Surveillance']==true){
+          $('#linkSurveillance').css('color','green');
+        }else{
+          console.log("Can't reach the surveillance");
+          $('#linkSurveillance').css('color','red');
+        }
+      });
+    }
+    function startSurveillanceRefresh(){
+      $('#cardConnectivity').append('<img src="http://192.168.86.4/IMAGE.JPG" class="img-fluid" id="surveillanceFeed">');
+      setInterval(function(){
+        var time = Math.round(new Date().getTime()/1000);
+        $('#surveillanceFeed').attr('src','http://192.168.86.4/IMAGE.JPG?'+time);
+      },1000);
+    }
+    function checkBridge(){  
+      $.get("api/?checkConnectivity=Bridge", function(data){
+        if(data['Bridge']==true){
+          $('#linkBridge').css('color','green');
+        }else{
+          console.log("Can't reach the Bridge");
+          $('#linkBridge').css('color','red');
+        }
+      });
+    }
+    function checkServer(){
+      $.get("api/?checkConnectivity=Server", function(data){
+        if(data['Server']==true){
+          $('#linkServer').css('color','green');
+          $('#localLinks').show();
+
+          //startSurveillanceRefresh();
+
+        }else{
+          $('#localLinks').hide();
+          console.log("Can't reach the server");
+          $('#linkServer').css('color','red');
+        }
+      });
+    }
+    function checkMycroft(){
+      $.get("api/?checkConnectivity=Mycroft", function(data){
+        if(data['Mycroft']==true){
+          $('#linkMycroft').css('color','green');
+        }else{
+          console.log("Can't reach the Bridge");
+          $('#linkMycroft').css('color','red');
+        }
+      });
+    }
+    function checkKali(){
+      $.get("api/?checkConnectivity=Kali", function(data){
+        if(data['Kali']==true){
+          $('#linkKali').css('color','green');
+        }else{
+          console.log("Can't reach the Bridge");
+          $('#linkKali').css('color','red');
+        }
+      });
+    }
+    function checkLaptop(){
+      $.get("api/?checkConnectivity=Laptop", function(data){
+        if(data['Laptop']==true){
+          $('#linkLaptop').css('color','green');
+        }else{
+          console.log("Can't reach the Bridge");
+          $('#linkLaptop').css('color','red');
+        }
+      });
+    }
     
     $.get("api/?checkMainPower", function(data){
       percent = data['Percent'];
@@ -446,14 +482,6 @@
         $('#shorePowerStatus').html('<span style="color: green;">Online</span>');
       }
     });
-    
-    function startSurveillance(){
-      $('#cardConnectivity').append('<img src="http://192.168.86.4/IMAGE.JPG" class="img-fluid" id="surveillanceFeed">');
-      setInterval(function(){
-        var time = Math.round(new Date().getTime()/1000);
-        $('#surveillanceFeed').attr('src','http://192.168.86.4/IMAGE.JPG?'+time);
-      },1000);
-    }
   </script>
 </body>
 </html>
