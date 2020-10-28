@@ -61,12 +61,8 @@
                 <li><a id="linkInternet"     href="https://google.com">Internet</li>
                 <li><a id="linkRouter"       href="http://192.168.86.1">Router</a></li>
                 <li><a id="linkNAS"          href="http://192.168.86.2">NAS</a></li>
-                
-                <li><a id="linkSurveillance" href="http://192.168.86.4">Surveillance</a></li>
-                <li><a id="linkBridge"       href="http://192.168.86.5" title="🌲🕒⚾">Bridge</a></li>
-                <li><a id="linkServer"       href="http://192.168.86.6" title="🔥📔✨">Application Server</a></li>
-                <li><a id="linkMycroft"      href="http://192.168.86.7" title="🔨💪👻">Mycroft</a></li>                
-                <li><a id="linkKali"         href="http://192.168.86.8" title="😢🐺🏠">Kali</a></li>
+                <li><a id="linkServer"       href="http://192.168.86.3">Server</a></li>
+                <li><a id="linkKali"         href="http://192.168.86.4">Kali</a></li>
                 <li><a id="linkLaptop"       href="http://192.168.86.9">Laptop</a></li>
               </ul>
               
@@ -87,18 +83,21 @@
         
         <div class="card mb-4">
           <div class="card-body">
-            <h5 class="card-title">Scene Control</h5>
+            <h5 class="card-title">Surveillance</h5>
             <div class="card-text">
+              <iframe src="http://192.168.86.3:8081"></iframe>
+            </div><!--End Card-text-->
+          </div><!--End Card-body-->
+        </div><!--End Card-->
+        
+        <!--
               <ul>
                 <li><a href="javascript:void(0);" onclick="ChangeScene('morning');">Good Morning</a></li>
                 <li><a href="javascript:void(0);" onclick="ChangeScene('chill');">Chill</a></li>
                 <li><a href="javascript:void(0);" onclick="ChangeScene('bed_time');">Bed Time</a></li>
                 <li><a href="javascript:void(0);" onclick="ChangeScene('blackout');">Blackout</a></li>
               </ul>
-            </div><!--End Card-text-->
-          </div><!--End Card-body-->
-        </div><!--End Card-->
-        
+        -->
       </div>
       <div class="card-columns" id="internetLinks">
         
@@ -337,14 +336,8 @@
       checkInternet();
       checkRouter();
       checkNAS();
-      //missing something at address 3
-      checkSurveillance();
-      checkBridge();
       checkServer();
-      checkMycroft();
       checkKali();
-      checkLaptop();
-      checkLaptop();
       
       setTimeout(function(){checkNetworkStatus();},60000);
     }
@@ -378,31 +371,13 @@
         }
       });
     }
-    //something at address 3
-    function checkSurveillance(){
-      $.get("api/?checkConnectivity=Surveillance", function(data){
-        if(data['Surveillance']==true){
-          $('#linkSurveillance').css('color','green');
+    function checkKali(){
+      $.get("api/?checkConnectivity=Kali", function(data){
+        if(data['Kali']==true){
+          $('#linkKali').css('color','green');
         }else{
-          console.log("Can't reach the surveillance");
-          $('#linkSurveillance').css('color','red');
-        }
-      });
-    }
-    function startSurveillanceRefresh(){
-      $('#cardConnectivity').append('<img src="http://192.168.86.4/IMAGE.JPG" class="img-fluid" id="surveillanceFeed">');
-      setInterval(function(){
-        var time = Math.round(new Date().getTime()/1000);
-        $('#surveillanceFeed').attr('src','http://192.168.86.4/IMAGE.JPG?'+time);
-      },1000);
-    }
-    function checkBridge(){  
-      $.get("api/?checkConnectivity=Bridge", function(data){
-        if(data['Bridge']==true){
-          $('#linkBridge').css('color','green');
-        }else{
-          console.log("Can't reach the Bridge");
-          $('#linkBridge').css('color','red');
+          console.log("Can't reach Kali");
+          $('#linkKali').css('color','red');
         }
       });
     }
@@ -418,16 +393,6 @@
           $('#localLinks').hide();
           console.log("Can't reach the server");
           $('#linkServer').css('color','red');
-        }
-      });
-    }
-    function checkMycroft(){
-      $.get("api/?checkConnectivity=Mycroft", function(data){
-        if(data['Mycroft']==true){
-          $('#linkMycroft').css('color','green');
-        }else{
-          console.log("Can't reach the Bridge");
-          $('#linkMycroft').css('color','red');
         }
       });
     }
