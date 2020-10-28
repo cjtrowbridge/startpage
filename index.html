@@ -51,7 +51,7 @@
     </div>
     <div class="col-12">
       
-      <div class="card-columns" id="localLinks">
+      <div class="col-4 col-xs-12" id="localLinks">
         
         <div class="card mb-4">
           <div class="card-body">
@@ -66,21 +66,16 @@
                 <li><a id="linkLaptop"       href="http://192.168.86.9">Laptop</a></li>
               </ul>
               
-              
+              <h5 class="card-title">Telemetry <a href="javascript:void(0);" onclick="updateSensors();">🔁</a><span id="updateTelemetryTimer" class="timer">⌛</span></h5>
+              <div class="card-text">
+                <div id="sensorData"></div>
+              </div><!--End Card-text-->
               
             </div><!--End Card-text-->
           </div><!--End Card-body-->
         </div><!--End Card-->
-        
-        <div class="card mb-4">
-          <div class="card-body">
-            <h5 class="card-title">Telemetry <a href="javascript:void(0);" onclick="updateSensors();">🔁</a><span id="updateTelemetryTimer" class="timer">⌛</span></h5>
-            <div class="card-text">
-              <div id="sensorData"></div>
-            </div><!--End Card-text-->
-          </div><!--End Card-body-->
-        </div><!--End Card-->
-        
+      </div>
+      <div class="col-8 col-xs-12">
         <div class="card mb-4">
           <div class="card-body">
             <h5 class="card-title">Surveillance</h5>
