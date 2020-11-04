@@ -12,7 +12,6 @@ if(isset($_GET['scene'])){
 
 if(isset($_GET['getSurveillanceEvents'])){
   header('Content-Type: application/json');
-  var_dump(getSurveillanceEvents());
   echo getSurveillanceEvents();
   exit;
 }
@@ -96,9 +95,16 @@ function checkShorePower(){
   );
 }
 function getSurveillanceEvents(){
-  $Events = scandir('surveillance');
-  foreach($Events as $Key => $Event){
-    $Events[$Key] = '/surveillance/'.$Event;
+  $Events = array();
+  if ($handle = opendir('./surveillance')) {
+    while (false !== ($file = readdir($handle))) {
+      if ($file != "." && $file != "..") {
+        $Events[filemtime($file)] = '/surveillance/'.$file;
+      }
+    }
+    closedir($handle);
+    // sort
+    ksort($Events);
   }
   return $Events;
 }
