@@ -98,22 +98,13 @@
                   });
                 }
               </script>
-              <div style="display: block; height:10empx; width:100%; border:1px solid #ccc; overflow:auto;">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Age</th>
-                      <th>Open</th>
-                    </tr>
-                  </thead>
-                  <tbody id="SurveillanceEvents">
-                    
-                  </tbody>
-                </table>
+              <div style="display: block; height:10empx; width:100%; border:1px solid #ccc; overflow:auto;" id="SurveillanceEvents">
               </div>
               <script>
                 funciton GetSurveillanceEvents(){
+                  $('#SurveillanceEvents').html('Loading recent surveillance events...');
                   $.get("/api/?getSurveillanceEvents", function(data){
+                    $('#SurveillanceEvents').html('');
                     console.log('Recent Surveillance Events');
                     console.log(data);
                     $.each(data, function(i, event){
