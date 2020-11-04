@@ -111,6 +111,8 @@
               </div>
               <script>
                 $.get("api/?getSurveillanceEvents", function(data){
+                  console.log('Recent Surveillance Events');
+                  console.log(data);
                   $.each(data, function(i, event){
                     var time = event.time;
                     var ago  = event.ago;
