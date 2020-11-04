@@ -98,14 +98,15 @@ function checkShorePower(){
 }
 function getSurveillanceEvents(){
   $Events = array();
-  if ($handle = opendir('../surveillance')) {
-    while (false !== ($file = readdir($handle))) {
+  $Path = '../surveillance';
+  if ($handle = opendir($Path)) {
+    while (false !== ($Path.$file = readdir($handle))) {
       if ($file != "." && $file != "..") {
-        $Events[filemtime($file)] = '/surveillance/'.$file;
+        $Events[filemtime($Path.$file)] = '/surveillance/'.$file;
       }
     }
+    
     closedir($handle);
-    // sort
     ksort($Events);
   }
   return $Events;
