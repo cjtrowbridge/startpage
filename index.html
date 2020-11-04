@@ -83,6 +83,31 @@
             <h5 class="card-title"><a href="http://192.168.86.3:8081">Surveillance</a></h5>
             <div class="card-text">
               <iframe src="http://192.168.86.3:8081" style="width: 100%; min-height: 350px;"></iframe>
+              
+              <img id="motionjpeg" src="http://user:pass@127.0.0.1:8080/" />
+              <script>
+                //Using jQuery for simplicity
+
+                $(document).ready(function() {
+                  var image = $("#motionjpeg"), src;
+
+                  if (!image.length) return;
+
+                  src = image.attr("src");
+                  if (src.indexOf("?") < 0) {
+                  image.attr("src", src + "?"); // must have querystring
+                  }
+
+                  image.on("load", function() {
+                    // this cause the load event to be called "recursively"
+                    this.src = this.src.replace(/\?[^\n]*$/, "?") +
+                    (new Date()).getTime(); // 'this' refers to the image
+                  });
+                });
+                
+                
+              </script>
+              
             </div><!--End Card-text-->
           </div><!--End Card-body-->
         </div><!--End Card-->
