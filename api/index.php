@@ -12,6 +12,7 @@ if(isset($_GET['scene'])){
 
 if(isset($_GET['getSurveillanceEvents'])){
   header('Content-Type: application/json');
+  var_dump(getSurveillanceEvents());
   echo getSurveillanceEvents();
   exit;
 }
