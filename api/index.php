@@ -119,6 +119,7 @@ function getSurveillanceEvents(){
     );
   }
   ksort($Ret);
+  $Ret = array_slice($Ret,0,5);
   return $Ret;
 }
 
