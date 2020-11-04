@@ -113,7 +113,7 @@
               </div>
               <script>
                 funciton GetSurveillanceEvents(){
-                  $.get("api/?getSurveillanceEvents", function(data){
+                  $.get("/api/?getSurveillanceEvents", function(data){
                     console.log('Recent Surveillance Events');
                     console.log(data);
                     $.each(data, function(i, event){
