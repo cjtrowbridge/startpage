@@ -10,6 +10,12 @@ if(isset($_GET['scene'])){
   exit;
 }
 
+if(isset($_GET['getSurveillanceEvents'])){
+  header('Content-Type: application/json');
+  echo getSurveillanceEvents();
+  exit;
+}
+
 if(isset($_GET['checkConnectivity'])){
   $Result = pingDevices($_GET['checkConnectivity']);
   die(json_encode($Result));
@@ -87,4 +93,11 @@ function checkShorePower(){
   return array(
     'State' => false
   );
+}
+function getSurveillanceEvents(){
+  $Events = scandir('surveillance');
+  foreach($Events as $Key => $Event){
+    $Events[$Key] = '/surveillance/'.$Event;
+  }
+  return $Events;
 }
