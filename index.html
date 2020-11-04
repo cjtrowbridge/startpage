@@ -84,17 +84,19 @@
             <div class="card-text">
               <img id="motionjpeg" src="http://192.168.86.3:8081/" width="480" height="320" />
               <script>
-                var image = $("#motionjpeg"), src;
-                if (!image.length) return;
-                src = image.attr("src");
-                if (src.indexOf("?") < 0) {
-                  image.attr("src", src + "?"); // must have querystring
+                function MJPEG(){
+                  var image = $("#motionjpeg"), src;
+                  if (!image.length) return;
+                  src = image.attr("src");
+                  if (src.indexOf("?") < 0) {
+                    image.attr("src", src + "?"); // must have querystring
+                  }
+                  image.on("load", function() {
+                    // this cause the load event to be called "recursively"
+                    this.src = this.src.replace(/\?[^\n]*$/, "?") +
+                    (new Date()).getTime(); // 'this' refers to the image
+                  });
                 }
-                image.on("load", function() {
-                  // this cause the load event to be called "recursively"
-                  this.src = this.src.replace(/\?[^\n]*$/, "?") +
-                  (new Date()).getTime(); // 'this' refers to the image
-                });
               </script>
               <div style="display: block; height:10empx; width:100%; border:1px solid #ccc; overflow:auto;">
                 <table>
@@ -110,16 +112,18 @@
                 </table>
               </div>
               <script>
-                $.get("api/?getSurveillanceEvents", function(data){
-                  console.log('Recent Surveillance Events');
-                  console.log(data);
-                  $.each(data, function(i, event){
-                    var time = event.time;
-                    var ago  = event.ago;
-                    var link = event.link;
-                    $('#SurveillanceEvents').append('<tr><td title="'+time+'">'+ago+'</td><td><a href="'+link+'" target="_blank">'+link+'</a></td></tr>');
+                funciton GetSurveillanceEvents(){
+                  $.get("api/?getSurveillanceEvents", function(data){
+                    console.log('Recent Surveillance Events');
+                    console.log(data);
+                    $.each(data, function(i, event){
+                      var time = event.time;
+                      var ago  = event.ago;
+                      var link = event.link;
+                      $('#SurveillanceEvents').append('<tr><td title="'+time+'">'+ago+'</td><td><a href="'+link+'" target="_blank">'+link+'</a></td></tr>');
+                    });
                   });
-                });
+                }
               </script>
             </div><!--End Card-text-->
           </div><!--End Card-body-->
@@ -487,6 +491,10 @@
         $('#shorePowerStatus').html('<span style="color: green;">Online</span>');
       }
     });
+    
+    MJPEG();
+    GetSurveillanceEvents();
+    
   </script>
 </body>
 </html>
