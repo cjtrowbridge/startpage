@@ -109,5 +109,12 @@ function getSurveillanceEvents(){
     closedir($handle);
     ksort($Events);
   }
-  return $Events;
+  $Ret = array();
+  foreach($Events as $Time => $Event){
+    $Ret[] = array(
+      'Time' => date('Y-m-d H:i:s',$Time),
+      'Link' => $Event
+    );
+  }
+  return $Ret;
 }
