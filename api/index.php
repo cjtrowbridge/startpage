@@ -117,6 +117,7 @@ function getSurveillanceEvents(){
       'Link' => $Event
     );
   }
+  rsort($Ret);
   return $Ret;
 }
 
