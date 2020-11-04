@@ -13,6 +13,7 @@ if(isset($_GET['scene'])){
 if(isset($_GET['getSurveillanceEvents'])){
   header('Content-Type: application/json');
   $Data = getSurveillanceEvents();
+  var_dump($Data);
   $JSON = json_encode($Data, JSON_PRETTY_PRINT);
   echo $JSON;
   exit;
