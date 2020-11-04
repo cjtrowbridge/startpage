@@ -100,7 +100,7 @@ function getSurveillanceEvents(){
   $Events = array();
   $Path = '../surveillance';
   if ($handle = opendir($Path)) {
-    while (false !== ($Path.$file = readdir($handle))) {
+    while (false !== ($file = readdir($handle))) {
       if ($file != "." && $file != "..") {
         $Events[filemtime($Path.$file)] = '/surveillance/'.$file;
       }
