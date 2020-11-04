@@ -111,13 +111,14 @@ function getSurveillanceEvents(){
   }
   $Ret = array();
   foreach($Events as $Time => $Event){
-    $Ret[] = array(
+    $Age = time() - $Time;
+    $Ret[$Age] = array(
       'Ago'  => ago($Time),
       'Time' => date('Y-m-d H:i:s',$Time),
       'Link' => $Event
     );
   }
-  rsort($Ret);
+  ksort($Ret);
   return $Ret;
 }
 
