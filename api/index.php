@@ -99,7 +99,7 @@ function checkShorePower(){
 }
 function getSurveillanceEvents(){
   $Events = array();
-  if ($handle = opendir('./surveillance')) {
+  if ($handle = opendir('../surveillance')) {
     while (false !== ($file = readdir($handle))) {
       if ($file != "." && $file != "..") {
         $Events[filemtime($file)] = '/surveillance/'.$file;
