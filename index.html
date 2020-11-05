@@ -108,9 +108,9 @@
                     console.log('Recent Surveillance Events');
                     console.log(data);
                     $.each(data, function(i, event){
-                      var time = event['time'];
-                      var ago  = event['ago'];
-                      var link = event['link'];
+                      var time = event.Time;
+                      var ago  = event.Ago;
+                      var link = event.Link;
                       $('#SurveillanceEvents').append('<tr><td title="'+time+'">'+ago+'</td><td><a href="'+link+'" target="_blank">'+link+'</a></td></tr>');
                     });
                   });
