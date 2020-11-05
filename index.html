@@ -101,7 +101,7 @@
               <div style="display: block; height:10empx; width:100%; border:1px solid #ccc; overflow:auto;" id="SurveillanceEvents">
               </div>
               <script>
-                funciton GetSurveillanceEvents(){
+                function GetSurveillanceEvents(){
                   $('#SurveillanceEvents').html('Loading recent surveillance events...');
                   $.get("/api/?getSurveillanceEvents", function(data){
                     $('#SurveillanceEvents').html('');
