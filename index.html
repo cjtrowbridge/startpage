@@ -83,7 +83,7 @@
         
         <div class="card mb-4">
           <div class="card-body">
-            <h5 class="card-title"><a href="http://192.168.86.3:8081">Surveillance</a></h5>
+            <h5 class="card-title"><a href="http://192.168.86.3:8081">Surveillance</a> <a href="javascript:void(0);" onclick="GetSurveillanceEvents();">🔁</a></h5>
             <div class="card-text">
               <a href="http://192.168.86.3:8081"><img id="motionjpeg" src="http://192.168.86.3:8081/" style="min-width: 480px; width: 100%; min-height: 320px" /></a>
               <div id="SurveillanceEvents"></div>
@@ -330,14 +330,15 @@
     }
     
     checkNetworkStatus();    
-    function checkNetworkStatus(){
+    function updateEverything(){
       checkInternet();
       checkRouter();
       checkNAS();
       checkServer();
       checkKali();
+      GetSurveillanceEvents();
       
-      setTimeout(function(){checkNetworkStatus();},60000);
+      setTimeout(function(){updateEverything();},60000);
     }
     
     function checkInternet(){
@@ -440,7 +441,7 @@
     function GetSurveillanceEvents(){
       $('#SurveillanceEvents').html('Loading recent surveillance events...');
       $.get("/api/?getSurveillanceEvents", function(data){
-        $('#SurveillanceEvents').html('<div><a href="javascript:void(0);" onclick="GetSurveillanceEvents();">🔁</a></div>');
+        $('#SurveillanceEvents').html('');
         console.log('Recent Surveillance Events');
         console.log(data);
         $.each(data, function(i, event){
