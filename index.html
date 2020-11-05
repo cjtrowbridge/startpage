@@ -330,7 +330,7 @@
     }
     
     checkNetworkStatus();    
-    function updateEverything(){
+    function checkNetworkStatus(){
       checkInternet();
       checkRouter();
       checkNAS();
@@ -338,7 +338,7 @@
       checkKali();
       GetSurveillanceEvents();
       
-      setTimeout(function(){updateEverything();},60000);
+      setTimeout(function(){checkNetworkStatus();},60000);
     }
     
     function checkInternet(){
