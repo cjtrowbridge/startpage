@@ -430,16 +430,6 @@
         }
       });
     }
-    function checkKali(){
-      $.get("api/?checkConnectivity=Kali", function(data){
-        if(data['Kali']==true){
-          $('#linkKali').css('color','green');
-        }else{
-          console.log("Can't reach the Bridge");
-          $('#linkKali').css('color','red');
-        }
-      });
-    }
     function checkLaptop(){
       $.get("api/?checkConnectivity=Laptop", function(data){
         if(data['Laptop']==true){
