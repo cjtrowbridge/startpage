@@ -105,7 +105,6 @@ function getSurveillanceEvents(){
         $Events[filemtime($Path.$file)] = '/surveillance/'.$file;
       }
     }
-    
     closedir($handle);
     ksort($Events);
   }
@@ -113,6 +112,7 @@ function getSurveillanceEvents(){
   foreach($Events as $Time => $Event){
     $Age = time() - $Time;
     $Size = filesize('..'.$Event)/1000000;
+    $Size = round($Size,3);
     $Ret[$Age] = array(
       'Ago'  => ago($Time),
       'Time' => date('Y-m-d H:i:s',$Time),
