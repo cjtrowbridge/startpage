@@ -325,7 +325,9 @@
   <script src="js/bootstrap.min.js"></script>
   <script>
     
+    GetSurveillanceEvents();
     updateSensors();
+    
     function updateSensors(){
       $('#updateTelemetryTimer').show();
       $.get("/sensors.php", function(data){
@@ -473,7 +475,7 @@
       }
     });
     
-    GetSurveillanceEvents();
+    
     
     
     
