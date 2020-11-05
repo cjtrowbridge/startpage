@@ -451,6 +451,7 @@
           $('#SurveillanceEvents').append('<a class="btn btn-success mt-2 mr-2" href="'+link+'" target="_blank">'+link+'</a> '+size+'mb <span title="'+time+'">'+ago+'</span><br>');
         });
         $('#SurveillanceEvents').append('<a class="btn btn-primary mt-2 mr-2" href="/surveillance/?C=M;O=D" target="_blank">More</a>');
+        $('#SurveillanceEvents').append('<a class="btn btn-outline-primary mt-2 mr-2" href="javascript:void(0);" onclick="GetSurveillanceEvents();">Refresh</a>');
       });
     }
     function MJPEG(){
