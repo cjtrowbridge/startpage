@@ -79,52 +79,20 @@
           </div><!--End Card-body-->
         </div><!--End Card-->
       
-      </div>
-      
+      </div><!--/col-4-->
       <div class="col-8 col-xs-12">
+        
         <div class="card mb-4">
           <div class="card-body">
             <h5 class="card-title"><a href="http://192.168.86.3:8081">Surveillance</a></h5>
             <div class="card-text">
               <img id="motionjpeg" src="http://192.168.86.3:8081/" width="480" height="320" />
-              <script>
-                function MJPEG(){
-                  var image = $("#motionjpeg"), src;
-                  if (!image.length) return;
-                  src = image.attr("src");
-                  if (src.indexOf("?") < 0) {
-                    image.attr("src", src + "?"); // must have querystring
-                  }
-                  image.on("load", function() {
-                    // this cause the load event to be called "recursively"
-                    this.src = this.src.replace(/\?[^\n]*$/, "?") +
-                    (new Date()).getTime(); // 'this' refers to the image
-                  });
-                }
-              </script>
               <div id="SurveillanceEvents">
               </div>
-              <script>
-                function GetSurveillanceEvents(){
-                  $('#SurveillanceEvents').html('Loading recent surveillance events...');
-                  $.get("/api/?getSurveillanceEvents", function(data){
-                    $('#SurveillanceEvents').html('');
-                    console.log('Recent Surveillance Events');
-                    console.log(data);
-                    $.each(data, function(i, event){
-                      var time = event.Time;
-                      var ago  = event.Ago;
-                      var link = event.Link;
-                      var size = event.Size;
-                      $('#SurveillanceEvents').append('<a class="btn btn-success mt-2 mr-2" href="'+link+'" target="_blank">'+link+'</a> '+size+'mb <span title="'+time+'">'+ago+'</span><br>');
-                    });
-                    $('#SurveillanceEvents').append('<a class="btn btn-primary mt-2 mr-2" href="/surveillance/" target="_blank">More</a>');
-                  });
-                }
-              </script>
             </div><!--End Card-text-->
           </div><!--End Card-body-->
         </div><!--End Card-->
+      </div>
         
         <!--
               <ul>
@@ -134,9 +102,8 @@
                 <li><a href="javascript:void(0);" onclick="ChangeScene('blackout');">Blackout</a></li>
               </ul>
         -->
-      </div>
-    
-    </div>
+      </div><!--/col-8-->
+    </div><!--/row-->
     <div class="row">
       
       <div class="card-columns" id="internetLinks">
@@ -481,8 +448,35 @@
       }
     });
     
-    
-    
+    function GetSurveillanceEvents(){
+      $('#SurveillanceEvents').html('Loading recent surveillance events...');
+      $.get("/api/?getSurveillanceEvents", function(data){
+        $('#SurveillanceEvents').html('');
+        console.log('Recent Surveillance Events');
+        console.log(data);
+        $.each(data, function(i, event){
+          var time = event.Time;
+          var ago  = event.Ago;
+          var link = event.Link;
+          var size = event.Size;
+          $('#SurveillanceEvents').append('<a class="btn btn-success mt-2 mr-2" href="'+link+'" target="_blank">'+link+'</a> '+size+'mb <span title="'+time+'">'+ago+'</span><br>');
+        });
+        $('#SurveillanceEvents').append('<a class="btn btn-primary mt-2 mr-2" href="/surveillance/" target="_blank">More</a>');
+      });
+    }
+    function MJPEG(){
+      var image = $("#motionjpeg"), src;
+      if (!image.length) return;
+      src = image.attr("src");
+      if (src.indexOf("?") < 0) {
+        image.attr("src", src + "?"); // must have querystring
+      }
+      image.on("load", function() {
+        // this cause the load event to be called "recursively"
+        this.src = this.src.replace(/\?[^\n]*$/, "?") +
+        (new Date()).getTime(); // 'this' refers to the image
+      });
+    }
     
     
     //This should be last
