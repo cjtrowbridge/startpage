@@ -112,11 +112,12 @@ function getSurveillanceEvents(){
   $Ret = array();
   foreach($Events as $Time => $Event){
     $Age = time() - $Time;
+    $Size = filesize('..'.$Event)/1000000;
     $Ret[$Age] = array(
       'Ago'  => ago($Time),
       'Time' => date('Y-m-d H:i:s',$Time),
       'Link' => $Event,
-      'Size' => filesize('..'.$Event)
+      'Size' => $Size
     );
   }
   ksort($Ret);
