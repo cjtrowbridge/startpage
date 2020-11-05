@@ -115,7 +115,8 @@ function getSurveillanceEvents(){
     $Ret[$Age] = array(
       'Ago'  => ago($Time),
       'Time' => date('Y-m-d H:i:s',$Time),
-      'Link' => $Event
+      'Link' => $Event,
+      'Size' => filesize('..'.$Event)
     );
   }
   ksort($Ret);
