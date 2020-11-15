@@ -49,11 +49,11 @@
     <div class="col-12">
       <!--Maybe put something here-->&nbsp;
     </div>
-    <div class="row" id="localLinks">
+    <div class="row">
       
       <div class="col-4 col-xs-12">
         
-        <div class="card mb-4">
+        <div class="card mb-4 local">
           <div class="card-body">
             <h5 class="card-title">Local Network <a href="javascript:void(0);" onclick="updateRepository();">🔁</a><span id="updateRepositoryTimer" class="timer">⌛</span></h5>
             <div class="card-text" id="cardConnectivity">
@@ -69,7 +69,7 @@
           </div><!--End Card-body-->
         </div><!--End Card-->
         
-        <div class="card mb-4">
+        <div class="card mb-4 local">
           <div class="card-body">
             <h5 class="card-title">Telemetry <a href="javascript:void(0);" onclick="updateSensors();">🔁</a><span id="updateTelemetryTimer" class="timer">⌛</span></h5>
             <div class="card-text">
@@ -81,7 +81,7 @@
       </div><!--/col-4-->
       <div class="col-8 col-xs-12">
         
-        <div class="card mb-4">
+        <div class="card mb-4 local">
           <div class="card-body">
             <h5 class="card-title"><a href="http://192.168.86.3:8081">Surveillance</a> <a href="javascript:void(0);" onclick="GetSurveillanceEvents();">🔁</a></h5>
             <div class="card-text">
@@ -384,12 +384,12 @@
       $.get("api/?checkConnectivity=Server", function(data){
         if(data['Server']==true){
           $('#linkServer').css('color','green');
-          $('#localLinks').show();
+          $('.local').show();
 
           //startSurveillanceRefresh();
 
         }else{
-          $('#localLinks').hide();
+          $('.local').hide();
           console.log("Can't reach the server");
           $('#linkServer').css('color','red');
         }
