@@ -56,7 +56,7 @@ function pingDevices($Device){
     case 'Bridge':
       return array('Bridge' => ping('192.168.86.5'));
     case 'Server':
-      return array('Server' => ping('192.168.86.6'));
+      return array('Server' => ping('192.168.86.3'));
     case 'Mycroft':
       return array('Mycroft' => ping('192.168.86.7'));
     case 'Kali':
