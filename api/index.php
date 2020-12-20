@@ -53,12 +53,12 @@ function pingDevices($Device){
     case 'Server':
       return array('Server'   => ping('192.168.0.3'));
     case 'Kali':
-      return array('Bridge'   => ping('192.168.0.4'));
+      return array('Kali'     => ping('192.168.0.4'));
     
     case 'Inside':
-      return array('Bridge'   => ping('192.168.0.10'));
-    case 'Inside':
-      return array('Bridge'   => ping('192.168.0.11'));
+      return array('Inside'   => ping('192.168.0.10'));
+    case 'Outside':
+      return array('Outside'  => ping('192.168.0.11'));
   }
 }
 function ping($ip){
