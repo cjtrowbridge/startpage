@@ -54,7 +54,9 @@
                 <li><a id="linkNAS"          href="http://192.168.86.2">NAS</a></li>
                 <li><a id="linkServer"       href="http://192.168.86.3">Server</a></li>
                 <li><a id="linkKali"         href="http://192.168.86.4">Kali</a></li>
-                <li><a id="linkLaptop"       href="http://192.168.86.9">Laptop</a></li>
+                
+                <li><a id="linkInside"       href="http://192.168.86.10">Inside</a></li>
+                <li><a id="linkOutside"      href="http://192.168.86.11">Outside</a></li>
               </ul>
             </div><!--End Card-text-->
           </div><!--End Card-body-->
@@ -327,6 +329,8 @@
       checkNAS();
       checkServer();
       checkKali();
+      checkInside();
+      checkOutside();
       GetSurveillanceEvents();
       
       setTimeout(function(){checkNetworkStatus();},60000);
@@ -386,48 +390,26 @@
         }
       });
     }
-    function checkLaptop(){
-      $.get("api/?checkConnectivity=Laptop", function(data){
-        if(data['Laptop']==true){
-          $('#linkLaptop').css('color','green');
+    function checkInside(){
+      $.get("api/?checkConnectivity=Inside", function(data){
+        if(data['Inside']==true){
+          $('#linkInside').css('color','green');
         }else{
-          console.log("Can't reach the Bridge");
-          $('#linkLaptop').css('color','red');
+          console.log("Can't reach the Inside sensors");
+          $('#linkInside').css('color','red');
         }
       });
     }
-    
-    $.get("api/?checkMainPower", function(data){
-      percent = data['Percent'];
-      state   = data['State'];
-      console.log("Main Power: "+state+" "+percent+"%");
-      console.log(data);
-      $('#mainPowerProgress').html('<div class="progress-bar" role="progressbar" style="width: '+percent+'%;" aria-valuenow="'+percent+'" aria-valuemin="0" aria-valuemax="100">'+percent+'%</div>');
-    });
-    
-    $.get("api/?checkBackupPower", function(data){
-      percent = data['Percent'];
-      state   = data['State'];
-      console.log("Backup Power: "+state+" "+percent+"%");
-      console.log(data);
-      $('#backupPowerProgress').html('<div class="progress-bar" role="progressbar" style="width: '+percent+'%;" aria-valuenow="'+percent+'" aria-valuemin="0" aria-valuemax="100">'+percent+'%</div>');
-    });
-    
-    $.get("api/?checkEnginePower", function(data){
-      if(data['State']==false){
-        $('#enginePowerStatus').html('<span style="color: red;">Offline</span>');
-      }else{
-        $('#enginePowerStatus').html('<span style="color: green;">Online</span>');
-      }
-    });
-    
-    $.get("api/?checkShorePower", function(data){
-      if(data['State']==false){
-        $('#shorePowerStatus').html('<span style="color: red;">Offline</span>');
-      }else{
-        $('#shorePowerStatus').html('<span style="color: green;">Online</span>');
-      }
-    });
+    function checkOutside(){
+      $.get("api/?checkConnectivity=Outside", function(data){
+        if(data['Outside']==true){
+          $('#linkOutside').css('color','green');
+        }else{
+          console.log("Can't reach the Outside sensors");
+          $('#linkOutside').css('color','red');
+        }
+      });
+    }
     
     function GetSurveillanceEvents(){
       $('#SurveillanceEvents').html('Loading recent surveillance events...');
