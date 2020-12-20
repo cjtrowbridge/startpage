@@ -47,23 +47,18 @@ function pingDevices($Device){
     case 'Internet':
       return array('Internet' => ping('8.8.8.8'));
     case 'Router':
-      return array('Router' => ping('192.168.86.1'));
+      return array('Router'   => ping('192.168.0.1'));
     case 'NAS':
-      return array('NAS' => ping('192.168.86.2'));
-    
-    case 'Surveillance':
-      return array('Surveillance' => ping('192.168.86.4'));
-    case 'Bridge':
-      return array('Bridge' => ping('192.168.86.5'));
+      return array('NAS'      => ping('192.168.0.2'));
     case 'Server':
-      return array('Server' => ping('192.168.86.3'));
-    case 'Mycroft':
-      return array('Mycroft' => ping('192.168.86.7'));
+      return array('Server'   => ping('192.168.0.3'));
     case 'Kali':
-      return array('Kali' => ping('192.168.86.8'));
-    case 'Laptop':
-      return array('Laptop' => ping('192.168.86.9'));
+      return array('Bridge'   => ping('192.168.0.4'));
     
+    case 'Inside':
+      return array('Bridge'   => ping('192.168.0.10'));
+    case 'Inside':
+      return array('Bridge'   => ping('192.168.0.11'));
   }
 }
 function ping($ip){
