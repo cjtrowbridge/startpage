@@ -53,7 +53,7 @@
                 <li><a id="linkRouter"       href="http://192.168.0.1">Router</a></li>
                 <li><a id="linkNAS"          href="http://192.168.0.2">NAS</a></li>
                 <li><a id="linkServer"       href="http://192.168.0.3">Server</a></li>
-                <li><a id="linkKali"         href="http://192.168.0.4">Kali</a></li>
+                <li><a id="linkBridge"       href="http://192.168.0.4">Bridge</a></li>
                 
                 <li><a id="linkInside"       href="http://192.168.0.10">Inside</a></li>
                 <li><a id="linkOutside"      href="http://192.168.0.11">Outside</a></li>
@@ -328,7 +328,7 @@
       checkRouter();
       checkNAS();
       checkServer();
-      checkKali();
+      checkBridge();
       checkInside();
       checkOutside();
       GetSurveillanceEvents();
@@ -365,13 +365,13 @@
         }
       });
     }
-    function checkKali(){
-      $.get("api/?checkConnectivity=Kali", function(data){
-        if(data['Kali']==true){
-          $('#linkKali').css('color','green');
+    function checkBridge(){
+      $.get("api/?checkConnectivity=Bridge", function(data){
+        if(data['Bridge']==true){
+          $('#linkBridge').css('color','green');
         }else{
-          console.log("Can't reach Kali");
-          $('#linkKali').css('color','red');
+          console.log("Can't reach Bridge");
+          $('#linkBridge').css('color','red');
         }
       });
     }
