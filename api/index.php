@@ -22,22 +22,6 @@ if(isset($_GET['checkConnectivity'])){
   $Result = pingDevices($_GET['checkConnectivity']);
   die(json_encode($Result));
 }
-if(isset($_GET['checkMainPower'])){
-  $Result = checkMainPower();
-  die(json_encode($Result));
-}
-if(isset($_GET['checkBackupPower'])){
-  $Result = checkBackupPower();
-  die(json_encode($Result));
-}
-if(isset($_GET['checkEnginePower'])){
-  $Result = checkEnginePower();
-  die(json_encode($Result));
-}
-if(isset($_GET['checkShorePower'])){
-  $Result = checkShorePower();
-  die(json_encode($Result));
-}
 if(isset($_GET['update'])){
   die(shell_exec('cd /var/www/ && git reset --hard && git pull'));
 }
@@ -52,8 +36,8 @@ function pingDevices($Device){
       return array('NAS'      => ping('192.168.0.2'));
     case 'Server':
       return array('Server'   => ping('192.168.0.3'));
-    case 'Kali':
-      return array('Kali'     => ping('192.168.0.4'));
+    case 'Bridge':
+      return array('Bridge'   => ping('192.168.0.4'));
     
     case 'Inside':
       return array('Inside'   => ping('192.168.0.10'));
@@ -68,28 +52,6 @@ function ping($ip){
   }else{
     return false;
   }
-}
-function checkMainPower(){
-  return array(
-    'State'   => 'Online',
-    'Percent' => '75'
-  );
-}
-function checkBackupPower(){
-  return array(
-    'State'   => 'Online',
-    'Percent' => '100'
-  );
-}
-function checkEnginePower(){
-  return array(
-    'State' => true
-  );
-}
-function checkShorePower(){
-  return array(
-    'State' => false
-  );
 }
 function getSurveillanceEvents(){
   $Events = array();
