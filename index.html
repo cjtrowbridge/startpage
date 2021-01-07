@@ -42,13 +42,14 @@
     </div>
     <div class="row">
       
-      <div class="col-4 col-xs-12">
+      <div class="col-12 col-md-4">
         
         <div class="card mb-4 local">
           <div class="card-body">
             <h5 class="card-title">Local Network <a href="javascript:void(0);" onclick="updateRepository();">🔁</a><span id="updateRepositoryTimer" class="timer">⌛</span></h5>
             <div class="card-text" id="cardConnectivity">
               <ul>
+                <li><a id="linkFiHotspot"    href="http://192.168.1.1">Fi Hotspot</a></li>
                 <li><a id="linkInternet"     href="https://google.com">Internet</li>
                 <li><a id="linkRouter"       href="http://192.168.0.1">Router</a></li>
                 <li><a id="linkNAS"          href="http://192.168.0.2">NAS</a></li>
@@ -72,13 +73,13 @@
         </div><!--End Card-->
       
       </div><!--/col-4-->
-      <div class="col-8 col-xs-12">
+      <div class="col-12 col-md-8">
         
         <div class="card mb-4 local">
           <div class="card-body">
             <h5 class="card-title"><a href="http://192.168.0.3:8081">Surveillance</a> <a href="javascript:void(0);" onclick="GetSurveillanceEvents();">🔁</a></h5>
             <div class="card-text">
-              <a href="http://192.168.0.3:8081"><img id="motionjpeg" src="http://192.168.0.3:8081/" style="min-width: 480px; width: 100%; min-height: 320px" /></a>
+              <!--a href="http://192.168.0.3:8081"><img id="motionjpeg" src="http://192.168.0.3:8081/" style="min-width: 480px; width: 100%; min-height: 320px" /></a-->
               <div id="SurveillanceEvents"></div>
             </div><!--End Card-text-->
           </div><!--End Card-body-->
@@ -324,6 +325,7 @@
     
     checkNetworkStatus();    
     function checkNetworkStatus(){
+      checkFiHotspot();
       checkInternet();
       checkRouter();
       checkNAS();
@@ -355,6 +357,17 @@
         }
       });
     }
+    function checkFiHotspot(){
+      $.get("api/?checkConnectivity=FiHotspot", function(data){
+        if(data['FiHotspot']==true){
+          $('#linkFiHotspot').css('color','green');
+        }else{
+          console.log("Can't reach the Fi Hotspot");
+          $('#linkFiHotspot').css('color','red');
+        }
+      });
+    }
+
     function checkNAS(){
       $.get("api/?checkConnectivity=NAS", function(data){
         if(data['NAS']==true){

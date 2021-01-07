@@ -28,6 +28,8 @@ if(isset($_GET['update'])){
 
 function pingDevices($Device){
   switch($Device){
+    case 'FiHotspot':
+      return array('FiHotspot' => ping('192.168.1.1'));
     case 'Internet':
       return array('Internet' => ping('8.8.8.8'));
     case 'Router':
@@ -38,7 +40,6 @@ function pingDevices($Device){
       return array('Server'   => ping('192.168.0.3'));
     case 'Bridge':
       return array('Bridge'   => ping('192.168.0.4'));
-    
     case 'Inside':
       return array('Inside'   => ping('192.168.0.10'));
     case 'Outside':
@@ -106,4 +107,39 @@ function ago($time){
     $periods[$j].= "s";
   }
   return "$difference $periods[$j] ago";
+}
+
+if(isset($_GET['FiModem'])){
+  switch($_GET['FiModem']){
+    case 'connect':
+      $url = 'http://192.168.1.1/cgi-bin/general_monitor.cgi';
+      $options = array(
+        'http' => array(
+          'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+          'method'  => 'POST',
+          'content' => http_build_query(array('command' => 'connect', 'params' => null))
+        )
+      );
+      $context  = stream_context_create($options);
+      $result = file_get_contents($url, false, $context);
+      var_dump($result);
+      break;
+    case 'disconnect':
+      $url = 'http://192.168.1.1/cgi-bin/general_monitor.cgi';
+      $options = array(
+        'http' => array(
+          'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+          'method'  => 'POST',
+          'content' => http_build_query(array('command' => 'disconnect', 'params' => null))
+        )
+      );
+      $context  = stream_context_create($options);
+      $result = file_get_contents($url, false, $context);
+      var_dump($result);
+      break;
+  }
+
+  $Data = file_get_contents('http://192.168.1.1/cgi-bin/general_monitor.cgi');
+  echo $Data;
+  exit;
 }
