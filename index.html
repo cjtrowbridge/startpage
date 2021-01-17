@@ -31,6 +31,9 @@
     .timer{
       display: none;
     }
+    video, card-columns{
+      max-width: 100%;
+    }
   </style>
 
   <title>Startpage - CJ Trowbridge</title>
@@ -86,6 +89,15 @@
             <h5 class="card-title">Sensor Telemetry <a href="javascript:void(0);" onclick="updateSensors();">🔁</a><span id="updateTelemetryTimer" class="timer">⌛</span></h5>
             <div class="card-text">
               <div id="sensorData"></div>
+            </div><!--End Card-text-->
+          </div><!--End Card-body-->
+        </div><!--End Card-->
+
+        <div class="card mb-4 local">
+          <div class="card-body">
+            <h5 class="card-title">Server Telemetry <a href="javascript:void(0);" onclick="updateServer();">🔁</a></h5>
+            <div class="card-text">
+              <div id="serverData"></div>
             </div><!--End Card-text-->
           </div><!--End Card-body-->
         </div><!--End Card-->
@@ -331,6 +343,7 @@
     
     checkNetworkStatus();    
     function checkNetworkStatus(){
+      updateServer();
       checkFiHotspot();
       checkInternet();
       checkRouter();
@@ -447,9 +460,10 @@
           var eta          = job.eta;
 
           var color = "warning";
-          if(cacheUrl != null){
+          if(status=='done'){
             url = cacheUrl;
             color = "success";
+            eta = status;
           }
           if(status=='in-progress'){
             color = "outline-success";
@@ -486,13 +500,32 @@
           var size = event.Size;
           if(first==true){
             first=false;
-            $('#SurveillanceEvents').append('<span title="'+time+'">'+ago+'</span><br><video autoplay loop><source src="'+link+'"></video>');
+            $('#SurveillanceEvents').append('<span title="'+time+'">'+ago+'</span><br><video autoplay loop style="max-width: 100%;"><source src="'+link+'"></video>');
           }
           $('#SurveillanceEvents').append('<a class="btn btn-success mt-2 mr-2" href="'+link+'" target="_blank">'+link+'</a> '+size+'mb <span title="'+time+'">'+ago+'</span><br>');
         });
         $('#SurveillanceEvents').append('<a class="btn btn-primary mt-2 mr-2" href="/surveillance/?C=M;O=D" target="_blank">More</a>');
         
       });
+    }
+    function updateServer(){
+      $.get("/api/?device", function(data){
+        $('#serverData').html('');
+        console.log('Server Data');
+        console.log(data);
+        var table = "<a target=\"_blank\" href=\"/vps/\">VPS-Home</a><br>\n<table width=\"100%\">\n  <tbody>";
+
+        for(var key in data){
+          if(data.hasOwnProperty(key)){
+            table = table + "\n    <tr>\n      <td>"+key+"</td>\n      <td>"+data[key]+"</td>\n    </tr>";
+          }
+        }
+
+        table = table + "\n    </tbody>\n  </table>";
+        $('#serverData').html(table);
+
+      });
+
     }
     function MJPEG(){
       var image = $("#motionjpeg"), src;

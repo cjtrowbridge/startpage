@@ -2,6 +2,25 @@
 
 header("Content-type:application/json");
 
+if(isset($_GET['device'])){
+  $DF  = intval(shell_exec("df | grep -oP '/root.* \K\d+(?=%)'"));
+  $RAM = shell_exec('free -m');
+  $RAM = explode(PHP_EOL, $RAM);
+  $RAM = $RAM[1];
+  $RAM = preg_replace('/\s+/', ' ', $RAM);
+  $RAM = explode(' ',$RAM);
+  $RAM = array(
+    'Total' => $RAM[1],
+    'Free'  => $RAM[3]
+  );
+  $RAM = round($RAM['Free'] / $RAM['Total']*100);
+  die(json_encode(array(
+    'SSD Free' => $DF.'%',
+    'RAM Free' => $RAM.'%'
+  ),true));
+}
+
+
 if(isset($_GET['scene'])){
   include_once('webhooks.php');
   if(isset($Webhooks[$_GET['scene']])){
