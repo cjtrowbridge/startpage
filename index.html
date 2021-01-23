@@ -357,6 +357,12 @@
       
       setTimeout(function(){checkNetworkStatus();},60000);
     }
+
+    checkServerStatus();
+    function checkServerStatus(){
+      checkServer();
+      setTimeout(function(){checkServerStatus();},5000);
+    }
     
     function checkInternet(){
       $.get("api/?checkConnectivity=Internet", function(data){
@@ -513,7 +519,7 @@
         $('#serverData').html('');
         console.log('Server Data');
         console.log(data);
-        var table = "<a target=\"_blank\" href=\"/vps/\">VPS-Home</a><br>\n<table width=\"100%\">\n  <tbody>";
+        var table = "<table width=\"100%\">\n  <tbody>";
 
         for(var key in data){
           if(data.hasOwnProperty(key)){
@@ -521,9 +527,8 @@
           }
         }
 
-        table = table + "\n    </tbody>\n  </table>";
+        table = table + "\n    </tbody>\n  </table><br><a class=\"btn btn-primary\" href=\"/vps/\">VPS-Home</a>";
         $('#serverData').html(table);
-
       });
 
     }

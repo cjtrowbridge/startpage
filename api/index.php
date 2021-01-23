@@ -2,6 +2,63 @@
 
 header("Content-type:application/json");
 
+function hotspotData(){
+  $General = file_get_contents('http://192.168.1.1/cgi-bin/general_monitor.cgi');
+  $Extended = shell_exec("curl 'http://192.168.1.1/cgi-bin/home.index.cgi' \
+  -H 'Connection: keep-alive' \
+  -H 'Accept: application/json, text/javascript, */*; q=0.01' \
+  -H 'X-Requested-With: XMLHttpRequest' \
+  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36' \
+  -H 'Content-Type: application/json; charset=UTF-8' \
+  -H 'Origin: http://192.168.1.1' \
+  -H 'Referer: http://192.168.1.1/' \
+  -H 'Accept-Language: en-US,en;q=0.9' \
+  -H 'Cookie: frkrouter=3d2fb48bfa8e2ab539dd69f7e1a5cd15' \
+  --data-binary '{\"command\":\"load\",\"params\":null}' \
+  --compressed \
+  --insecure");
+  return array(
+    'General'  => json_decode($General,true),
+    'Extended' => json_decode($Extended,true)
+  );
+}
+
+function downlinkSpeed($Duration){
+  $First = hotspotData();
+  sleep($Duration);
+  $Second = hotspotData();
+  if(!(strpos($First['Extended']['data']['size_used']," MB") === false)){
+    $Downloaded = trim($Second['Extended']['data']['size_used'], " MB") - trim($First['Extended']['data']['size_used'], " MB");
+  }else{
+    $Downloaded = trim($Second['Extended']['data']['size_used'], " GB") - trim($First['Extended']['data']['size_used'], " GB");
+    $Downloaded = $Downloaded * 1000;
+  }
+  $Speed = $Downloaded / 10;
+  if($Speed > 1){
+    $Speed = round($Speed*100)/100;
+    return $Speed.' mb/sec';
+  }else{
+    $Speed = round($Speed*100)/100;
+    $Speed = ($Speed*1000);
+    return $Speed.' kb/sec';
+  }
+
+}
+
+if(isset($_GET['hotspotSpeed'])){
+  $Duration = intval($_GET['hotspotSpeed']);
+  if($Duration == 0){
+    $Duration = 10;
+  }
+  echo downlinkSpeed($Duration);
+  exit;
+}
+
+if(isset($_GET['hotspot'])){
+  echo json_encode(hotspotData(), JSON_PRETTY_PRINT);
+  exit;
+}
+
 if(isset($_GET['device'])){
   $DF  = intval(shell_exec("df | grep -oP '/root.* \K\d+(?=%)'"));
   $RAM = shell_exec('free -m');
@@ -15,8 +72,9 @@ if(isset($_GET['device'])){
   );
   $RAM = round($RAM['Free'] / $RAM['Total']*100);
   die(json_encode(array(
-    'SSD Free' => $DF.'%',
-    'RAM Free' => $RAM.'%'
+    'SSD Free'     => $DF.'%',
+    'RAM Free'     => $RAM.'%',
+    'Uplink Speed' => downlinkSpeed(5)
   ),true));
 }
 
