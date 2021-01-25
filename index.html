@@ -25,9 +25,6 @@
     body, h1, h2, h3, h4, h5, h6, a{
       color: #D3AFA6;
     }
-    #localLinks{
-      display: none;
-    }
     .timer{
       display: none;
     }
@@ -46,7 +43,7 @@
     <div class="row">
       <div class="card-columns">
         
-        <div class="card mb-4 local">
+        <div class="card mb-4">
           <div class="card-body">
             <h5 class="card-title">Local Network <a href="javascript:void(0);" onclick="updateRepository();">🔁</a><span id="updateRepositoryTimer" class="timer">⌛</span></h5>
             <div class="card-text" id="cardConnectivity">
@@ -54,9 +51,7 @@
                 <li><a id="linkInternet"     href="https://google.com">Internet</li>
                 <li><a id="linkFiHotspot"    href="http://192.168.1.1">T-Mobile Hotspot</a></li>
                 <li><a id="linkRouter"       href="http://192.168.0.1">Router</a></li>
-                <li><a id="linkNAS"          href="http://192.168.0.2">NAS</a></li>
                 <li><a id="linkServer"       href="http://192.168.0.3">Server</a></li>
-                <li><a id="linkBridge"       href="http://192.168.0.4">Bridge</a></li>
                 
                 <li><a id="linkInside"       href="http://192.168.0.10">Inside Sensors</a></li>
                 <li><a id="linkOutside"      href="http://192.168.0.11">Outside Sensors</a></li>
@@ -105,11 +100,7 @@
         </div><!--End Card-->
 
 
-      </div><!--/card-columns-->
-    </div><!--/row-->
-    <div class="row">
-      
-      <div class="card-columns" id="internetLinks">
+        
         
         <div class="card mb-4">
           <div class="card-body">
@@ -414,7 +405,7 @@
           //startSurveillanceRefresh();
 
         }else{
-          $('.local').hide();
+          //$('.local').hide();
           console.log("Can't reach the server");
           $('#linkServer').css('color','red');
         }
