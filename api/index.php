@@ -116,7 +116,7 @@ function pingDevices($Device){
     case 'Server':
       return array('Server'   => ping('192.168.0.3'));
     case 'Bridge':
-      return array('Bridge'   => ping('192.168.0.4'));
+      return array('Bridge'   => ping('192.168.1.2'));
     case 'Inside':
       return array('Inside'   => ping('192.168.0.10'));
     case 'Outside':
