@@ -33,9 +33,6 @@
       body, h1, h2, h3, h4, h5, h6, a{
         color: #D3AFA6;
       }
-      body, h1, h2, h3, h4, h5, h6, a{
-        color: #D3AFA6;
-      }
       img.big{
         width: 100%;
         max-width: 100%;
@@ -75,7 +72,6 @@
                 <h1 class="display-1">CJ Trowbridge</h1>
                 The world is very broken and very complicated.<br>
                 There are a lot of pieces to try to understand.
-                <div class="mt-4"><style>.bmc-button img{height: 34px !important;width: 35px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{padding: 7px 10px 7px 10px !important;line-height: 35px !important;height:51px !important;min-width:217px !important;text-decoration: none !important;display:inline-flex !important;color:#FFFFFF !important;background-color:#FF813F !important;border-radius: 5px !important;border: 1px solid transparent !important;padding: 7px 10px 7px 10px !important;font-size: 20px !important;letter-spacing:-0.08px !important;box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;margin: 0 auto !important;font-family:'Lato', sans-serif !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;-o-transition: 0.3s all linear !important;-webkit-transition: 0.3s all linear !important;-moz-transition: 0.3s all linear !important;-ms-transition: 0.3s all linear !important;transition: 0.3s all linear !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#FFFFFF !important;}</style><link href="https://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext" rel="stylesheet"><a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/cjtrowbridge"><img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy me a coffee"><span style="margin-left:15px;font-size:19px !important;">Buy me a coffee</span></a></div>
               </div><!--/card-text-->
             </div><!--/card-body-->
           </div><!--/card-->
@@ -84,11 +80,248 @@
         <div class="col-md-6">
           <div class="card my-4">
             <div class="card-body">
+              <h5 class="card-title">Local Network <a href="javascript:void(0);" onclick="updateRepository();">🔁</a><span id="updateRepositoryTimer" class="timer">⌛</span></h5>
+              <div class="card-text" id="cardConnectivity">
+                <ul>
+                  <li><a id="linkInternet"     href="https://google.com">Internet</li>
+                  <li><a id="linkFiHotspot"    href="http://192.168.1.1">T-Mobile Hotspot</a></li>
+                  <li><a id="linkBridge"       href="http://192.168.1.2">Bridge</a></li>
+                  <li><a id="linkRouter"       href="http://192.168.0.1">Router</a></li>
+                  <li><a id="linkServer"       href="http://192.168.0.3">Server</a></li>
+
+                  <li><a id="linkInside"       href="http://192.168.0.10">Inside Sensors</a></li>
+                  <li><a id="linkOutside"      href="http://192.168.0.11">Outside Sensors</a></li>
+                </ul>
+              </div><!--End Card-text-->
+            </div><!--End Card-body-->
+          </div><!--End Card-->
+        </div><!--/col-md-6-->
+
+        <div class="col-md-6">
+          <div class="card my-4 local">
+            <div class="card-body">
+              <h5 class="card-title"><a href="http://192.168.0.3:8081">Surveillance</a> <a href="javascript:void(0);" onclick="GetSurveillanceEvents();">🔁</a></h5>
               <div class="card-text">
-                <a href="https://www.facebook.com/djcj88" target="_blank"><img src="/cj.jpg" class="big" alt="CJ Trowbridge"></a>
-              </div><!--/card-text-->
-            </div><!--/card-body-->
-          </div><!--/card-->
+                <!--a href="http://192.168.0.3:8081"><img id="motionjpeg" src="http://192.168.0.3:8081/" style="min-width: 480px; width: 100%; min-height: 320px" /></a-->
+                <div id="SurveillanceEvents"></div>
+              </div><!--End Card-text-->
+            </div><!--End Card-body-->
+          </div><!--End Card-->
+        </div><!--/col-md-6-->
+
+        <div class="col-md-6">
+          <div class="card my-4 local">
+            <div class="card-body">
+              <h5 class="card-title">Sensor Telemetry <a href="javascript:void(0);" onclick="updateSensors();">🔁</a><span id="updateTelemetryTimer" class="timer">⌛</span></h5>
+              <div class="card-text">
+                <div id="sensorData"></div>
+              </div><!--End Card-text-->
+            </div><!--End Card-body-->
+          </div><!--End Card-->
+        </div><!--/col-md-6-->
+
+        <div class="col-md-6">
+          <div class="card my-4 local">
+            <div class="card-body">
+              <h5 class="card-title">Server Telemetry <a href="javascript:void(0);" onclick="updateServer();">🔁</a></h5>
+              <div class="card-text">
+                <div id="serverData"></div>
+              </div><!--End Card-text-->
+            </div><!--End Card-body-->
+          </div><!--End Card-->
+        </div><!--/col-md-6-->
+
+
+
+
+        <div class="col-md-6">
+          <div class="card my-4">
+            <div class="card-body">
+              <h5 class="card-title">Content Properties</h5>
+              <div class="card-text">
+                <ul>
+                  <li><a href="https://movingcabin.com">Moving Cabin</a></li>
+                  <li><a href="https://communaleffort.org">Communal Effort</a></li>
+                  <li><a href="https://resource-sovereignty.net">Resource Sovereignty</a></li>
+                  <li><a href="https://nomadpedia.org">Nomad Pedia</a></li>
+                </ul>
+              </div><!--End Card-text-->
+            </div><!--End Card-body-->
+          </div><!--End Card-->
+        </div><!--/col-md-6-->
+
+        <div class="col-md-6">
+          <div class="card my-4">
+            <div class="card-body">
+              <h5 class="card-title">Daily</h5>
+              <div class="card-text">
+                <ul>
+                  <li><a href="https://mail.protonmail.com/inbox">ProtonMail</a></li>
+                  <li><a href="https://calendar.google.com/calendar/r#main_7%7Cweek">Calendar</a></li>
+                  <li><a href="https://trello.com/b/L0z2c79k/to-do">Trello: Todo</a></li>
+                  <li><a href="https://cjtrowbridge.com/news">World News Audio Recap</a></li>
+                  <li><a href="https://newsmap-js.herokuapp.com/">Newsmap</a></li>
+                </ul>
+              </div><!--End Card-text-->
+            </div><!--End Card-body-->
+          </div><!--End Card-->
+        </div><!--/col-md-6-->
+
+        <div class="col-md-6">
+          <div class="card my-4">
+            <div class="card-body">
+              <h5 class="card-title">Waste Time</h5>
+              <div class="card-text">
+                <ul>
+                  <li><a href="https://4chan.org/">4chan</a></li>
+                  <li><a href="https://news.ycombinator.com/">Hacker News</a></li>
+                  <li><a href="https://huffpost.com/">Huffington Post</a></li>
+                  <li><a href="https://reddit.com">Reddit</a></li>
+                  <li><a href="https://facebook.com">Facebook</a></li>
+                </ul>
+              </div><!--End Card-text-->
+            </div><!--End Card-body-->
+          </div><!--End Card-->
+        </div><!--/col-md-6-->
+
+        <div class="col-md-6">
+          <div class="card my-4">
+            <div class="card-body">
+              <h5 class="card-title">Productivity</h5>
+              <div class="card-text">
+                <ul>
+                  <li><a href="https://calendar.google.com/calendar/r#main_7%7Cweek">Calendar</a></li>
+                  <li><a href="https://trello.com/b/L0z2c79k/to-do">Trello: Todo</a></li>
+                  <li><a href="https://slack.com">Slack</a></li>
+                  <li><a href="https://ifttt.com/">IFTTT</a></li>
+                  <li><a href="https://hangouts.google.com/">Hangouts</a></li>
+                  <li><a href="https://web.whatsapp.com/">WhatsApp</a></li>
+                  <li><a href="https://remotedesktop.google.com/access">Remote Desktop</a></li>
+                </ul>
+              </div><!--End Card-text-->
+            </div><!--End Card-body-->
+          </div><!--End Card-->
+        </div><!--/col-md-6-->
+
+        <div class="col-md-6">
+          <div class="card my-4">
+            <div class="card-body">
+              <h5 class="card-title">School</h5>
+              <div class="card-text">
+                <h6><a href="https://inside.sfsu.edu">SFSU</a></h6>
+                <ul>
+                  <li><a href="https://ilearn.sfsu.edu/ay2021/course/view.php?id=17939">USP 470 - City in a Global Society</a></li>
+                  <li><a href="https://ilearn.sfsu.edu/ay2021/course/view.php?id=15208">RRS 380 - Coloring Queer: Imagining Communities</a></li>
+                  <li><a href="https://ilearn.sfsu.edu/ay2021/course/view.php?id=12875">PHIL 621 - Minds, Brains, and Computers</a></li>
+                  <li><a href="https://ilearn.sfsu.edu/ay2021/course/view.php?id=13152">USP 658 - Land-Use Planning</a></li>
+                  <li><a href="https://ilearn.sfsu.edu/ay2021/course/view.php?id=14203">USP 530 - Alternative Urban Futures</a></li>
+                </ul>
+                <h6>Tools</h6>
+                <ul>
+                  <li><a href="https://library.sfsu.edu/urban-studies-research">Library: USP Research</a></li>
+                  <li><a href="https://sfsu.maps.arcgis.com/home/index.html">ARCGIS</a></li>
+                  <li><a href="https://csu-sfsu.userservices.exlibrisgroup.com/view/action/uresolver.do?operation=resolveService&package_service_id=5962223930002918&institutionId=2918&customerId=2900">Social Explorer</a></li>
+                  <li><a href="http://sfsu.qualtrics.com/">Qualtrics</a></li>
+                </ul>
+              </div><!--End Card-text-->
+            </div><!--End Card-body-->
+          </div><!--End Card-->
+        </div><!--/col-md-6-->
+
+        <div class="col-md-6">
+          <div class="card my-4">
+            <div class="card-body">
+              <h5 class="card-title">Dev</a></h5>
+              <div class="card-text">
+                <ul>
+                  <li>
+                    <a href="https://github.com/">Github</a>
+                    <ul>
+                      <li><a href="https://github.com/cjtrowbridge/astria-14.1">Astria 14.1</a></li>
+                      <li><a href="https://cjtrowbridge.com">cjtrowbridge.com</a></li>
+                      <li><a href="https://github.com/cjtrowbridge/startpage">Startpage</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="https://vps.cjtrowbridge.com/">VPS</a></li>
+                </ul>
+              </div><!--End Card-text-->
+            </div><!--End Card-body-->
+          </div><!--End Card-->
+        </div><!--/col-md-6-->
+
+        <div class="col-md-6">
+          <div class="card my-4">
+            <div class="card-body">
+              <h5 class="card-title">Input</a></h5>
+              <div class="card-text">
+                <ul>
+                  <li><a href="https://cjtrowbridge.com/news">News</a></li>
+                  <li><a href="https://www.youtube.com/watch?v=5qap5aO4i9A">ChilledCow LoFi Hip Hop</a></li>
+                  <li><a href="https://open.spotify.com/">Spotify</a></li>
+                </ul>
+              </div><!--End Card-text-->
+            </div><!--End Card-body-->
+          </div><!--End Card-->
+        </div><!--/col-md-6-->
+
+        <div class="col-md-6">
+          <div class="card my-4">
+            <div class="card-body">
+              <h5 class="card-title">Money</h5>
+              <div class="card-text">
+                <ul>
+                  <li><a href="https://www.wellsfargo.com/">Wells Fargo</a></li>
+                  <li><a href="https://venmo.com/">Venmo</a></li>
+                  <li><a href="https://robinhood.com/">Robinhood</a></li>
+                  <li><a href="https://www.paypal.com/signin/">Paypal</a></li>
+                  <li><a href="https://bankmobilevibe.com/">Bank Mobile Vibe</a></li>
+                  <li><a href="https://www.mint.com/">Mint</a></li>
+                  <li><a href="https://stripe.com/">Stripe</a></li>
+                </ul>
+                <h5>Bills & Subscriptions</h5>
+                <ul>
+                  <li><a href="https://membership.calstate.aaa.com/user/login?destination=aaa-oauth/authorize">AAA</a></li>
+                  <li><a href="https://www.blueshieldca.com/bsca/bsc/public/member/mp/login">Blue Cross</a></li>
+                  <li><a href="https://verified.capitalone.com/sic-ui/#/esignin?Product=360Bank">Capital One</a></li>
+                  <li><a href="https://www.costco.com/">Costco</a></li>
+                  <li><a href="https://www.digitalocean.com/">Digital Ocean</a></li>
+                  <li><a href="https://fi.google.com/account">Google Fi</a></li>
+                  <li><a href="https://www.privateinternetaccess.com/pages/client-sign-in">Private Internet Access</a></li>
+                  <li><a href="https://open.spotify.com/">Spotify</a></li>
+                </ul>
+              </div><!--End Card-text-->
+            </div><!--End Card-body-->
+          </div><!--End Card-->
+        </div><!--/col-md-6-->
+
+        <div class="col-md-6">
+          <div class="card my-4">
+            <div class="card-body">
+              <h5 class="card-title">Torrents</h5>
+              <div class="card-text">
+                <ul>
+                  <li><a href="https://audiobookbay.nl">Audiobook Bay</a></li>
+                  <li><a href="https://libgen.is">Library Genesis</a></li>
+                  <li><a href="https://thehiddenbay.org">The Hidden Bay</a></li>
+                </ul>
+              </div><!--End Card-text-->
+            </div><!--End Card-body-->
+          </div><!--End Card-->
+        </div><!--/col-md-6-->
+
+        <div class="col-md-6">
+          <div class="card my-4">
+            <div class="card-body">
+              <h5 class="card-title">NAS</a></h5>
+              <div class="card-text">
+                <ul>
+                  <li><a href="http://192.168.86.2:5000/">CJ-NAS</a></li>
+                  <li><a href="http://192.168.86.2:32400/web/index.html#">Plex</a></li>
+                  <li><a href="http://192.168.86.2:28888/gui/">Sync</a></li>
+                </ul>
+              </div><!--End Card-text-->
+            </div><!--End Card-body-->
+          </div><!--End Card-->
         </div><!--/col-md-6-->
           
         
